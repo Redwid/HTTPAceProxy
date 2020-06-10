@@ -98,6 +98,7 @@ class HTTPHandler(BaseHTTPRequestHandler):
         logging.debug('[%s]: Request headers: %s' % (self.clientip, dict(self.headers)))
 
         if AceConfig.firewall and not checkFirewall(self.clientip):
+           logging.debug('Dropping connection due to firewall rules')
            self.send_error(401, '[{clientip}]: Dropping connection due to firewall rules'.format(**self.__dict__), logging.ERROR)
 
         self.path, _, self.query = self.path.partition('?')
@@ -124,16 +125,19 @@ class HTTPHandler(BaseHTTPRequestHandler):
            if self.reqtype in {'content_id', 'url', 'infohash', 'direct_url', 'data', 'efile_url'}:
               # Limit on the number of connected clients
               if 0 < AceConfig.maxconns <= len(AceProxy.clientcounter.getAllClientsList()):
+                 logging.debug('Maximum client connections reached, can\'t serve request')
                  self.send_error(403, "[{clientip}]: Maximum client connections reached, can't serve request".format(**self.__dict__), logging.ERROR)
               # Check if third path parameter is exists /{reqtype}/{reqtype_value}/.../.../video.mpg
               #                                                                           |_________|
               # And if it ends with regular video extension
               if not self.splittedpath[-1].endswith(('.avi', '.flv', '.m2ts', '.mkv', '.mpeg', '.mpeg4', '.mpegts',
                                                      '.mpg4', '.mp4', '.mpg', '.mov', '.mpv', '.qt', '.ts', '.wmv')):
+                    logging.debug('Request seems like valid but no valid video extension was provided')
                     self.send_error(501, '[{clientip}]: request seems like valid but no valid video extension was provided'.format(**self.__dict__), logging.ERROR)
               else:
                  self.handleRequest()
            elif self.reqtype not in AceProxy.pluginshandlers:
+              logging.debug('Bad Request')
               self.send_error(400, '[{clientip}]: Bad Request'.format(**self.__dict__), logging.WARNING)  # 400 Bad Request
 
         except Exception as e:
@@ -183,6 +187,7 @@ class HTTPHandler(BaseHTTPRequestHandler):
               AceProxy.clientcounter.idleAce._title = self.channelName
            except Exception as e:
               AceProxy.clientcounter.idleAce._read.kill()
+              logging.debug('Error 404')
               self.send_error(404, '%s' % repr(e), logging.ERROR)
 
            self.ext = self.__dict__.get('ext', self.channelName[self.channelName.rfind('.') + 1:])
@@ -440,7 +445,7 @@ def check_compatibility(gevent_version, psutil_version):
        # Check gevent for compatibility.
        major, minor, patch = map(int, gevent_version.split('.')[:3])
        # gevent >= 1.3.3
-       assert major >= 1
+       assert major == 1
        assert minor >= 3
        assert minor >= 3
 
@@ -473,7 +478,7 @@ except (AssertionError, ValueError):
 
 #### Initial settings for AceHTTPproxy host IP
 if AceConfig.httphost == 'auto':
-   AceConfig.httphost = get_ip_address()
+   AceConfig.httphost = '192.168.1.8' #get_ip_address()
    logger.debug('Ace Stream HTTP Proxy server IP: %s autodetected' % AceConfig.httphost)
 
 # Check whether we can bind to the defined port safely

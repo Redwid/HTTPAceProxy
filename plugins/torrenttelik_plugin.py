@@ -6,6 +6,7 @@ http://ip:port/torrent-telik
 __author__ = 'AndreyPavlenko, Dorik1972'
 
 import traceback
+import time
 import gevent, requests, os
 import logging, zlib
 from urllib3.packages.six.moves.urllib.parse import urlparse, quote, unquote
@@ -30,57 +31,78 @@ class Torrenttelik(object):
         try:
            s = requests.Session()
            s.mount('file://', FileAdapter())
-           with s.get(config.url, headers=self.headers, proxies=config.proxies, stream=False, timeout=30) as playlist:
-              if playlist.status_code != 304:
-                 if playlist.encoding is None: playlist.encoding = 'utf-8'
-                 playlist = playlist.json()
-                 self.headers['If-Modified-Since'] = gevent.time.strftime('%a, %d %b %Y %H:%M:%S %Z', gevent.time.gmtime(self.playlisttime))
-                 self.playlist = PlaylistGenerator(m3uchanneltemplate=config.m3uchanneltemplate)
-                 self.picons = picons.logomap
-                 self.channels = {}
-                 m = requests.auth.hashlib.md5()
-                 logging.info('[%s]: playlist %s downloaded' % (self.__class__.__name__, config.url))
-                 try:
-                    urlpattern = requests.utils.re.compile(r'^(acestream|infohash)://[0-9a-f]{40}$|^(http|https)://.*.(acelive|acestream|acemedia|torrent)$')
-                    for channel in playlist['channels']:
-                       name = channel['name']
-                       url = 'acestream://{url}'.format(**channel)
-                       channel['group'] = channel.pop('cat')
-                       channel['logo'] = self.picons[name] = channel.get('logo', picons.logomap.get(name))
+           for index in range(3):
+               try:
+                   logging.info("[%s]: get: %s" % (self.__class__.__name__, config.url))
+                   with s.get(config.url, headers=self.headers, proxies=config.proxies, stream=False, timeout=30) as playlist:
+                      if playlist.status_code != 304:
+                         if playlist.encoding is None: playlist.encoding = 'utf-8'
+                         playlist = playlist.json()
+                         self.headers['If-Modified-Since'] = gevent.time.strftime('%a, %d %b %Y %H:%M:%S %Z', gevent.time.gmtime(self.playlisttime))
+                         self.playlist = PlaylistGenerator(m3uchanneltemplate=config.m3uchanneltemplate)
+                         self.picons = picons.logomap
+                         self.channels = {}
+                         m = requests.auth.hashlib.md5()
+                         logging.info('[%s]: playlist %s downloaded' % (self.__class__.__name__, config.url))
+                         try:
+                            urlpattern = requests.utils.re.compile(r'^(acestream|infohash)://[0-9a-f]{40}$|^(http|https)://.*.(acelive|acestream|acemedia|torrent)$')
+                            for channel in playlist['channels']:
+                               name = channel['name']
+                               url = 'acestream://{url}'.format(**channel)
+                               channel['group'] = channel.pop('cat')
+                               channel['logo'] = self.picons[name] = channel.get('logo', picons.logomap.get(name))
 
-                       if requests.utils.re.search(urlpattern, url):
-                          self.channels[name] = url
-                          channel['url'] = quote(ensure_str(name),'')
+                               if requests.utils.re.search(urlpattern, url):
+                                  self.channels[name] = url
+                                  channel['url'] = quote(ensure_str(name),'')
 
-                       self.playlist.addItem(channel)
-                       m.update(ensure_binary(name))
+                               self.playlist.addItem(channel)
+                               m.update(ensure_binary(name))
 
-                 except Exception as e:
-                    logging.error("[%s]: can't parse JSON! %s" % (self.__class__.__name__, repr(e)))
-                    return False
+                         except Exception as e:
+                            logging.error("[%s]: can't parse JSON! %s" % (self.__class__.__name__, repr(e)))
+                            return False
 
-                 self.etag = '"' + m.hexdigest() + '"'
-                 logging.debug('[%s]: plugin playlist generated' % self.__class__.__name__)
+                         self.etag = '"' + m.hexdigest() + '"'
+                         logging.debug('[%s]: plugin playlist generated' % self.__class__.__name__)
 
-              self.playlisttime = gevent.time.time()
+                      self.playlisttime = gevent.time.time()
+                      logging.info("Return True")
+                      return True
+               except ValueError:
+                   logging.error("[%s]: can't parse %s playlist, attempt: %d" % (self.__class__.__name__, config.url, index + 1))
+                   if index + 1 < 3:
+                       logging.error("Sleeping")
+                       time.sleep((index + 1) * 2)
+                       logging.error("Sleeping end")
+                   else:
+                       logging.error("Return False")
+                       return False
 
         except requests.exceptions.RequestException:
            logging.error("[%s]: can't download %s playlist!" % (self.__class__.__name__, config.url))
            return False
-        except: logging.error(traceback.format_exc()); return False
+        except:
+            logging.error("[%s]: can't parse %s playlist!" % (self.__class__.__name__, config.url))
+            logging.error(traceback.format_exc())
+            return False
 
     def handle(self, connection):
         # 30 minutes cache
         if not self.playlist or (gevent.time.time() - self.playlisttime > 30 * 60):
-           if not self.Playlistparser(): connection.send_error()
+           if not self.Playlistparser():
+              logging.info('Parser failed to parse')
+              connection.send_error()
 
         connection.ext = query_get(connection.query, 'ext', 'ts')
         if connection.path.startswith('/{reqtype}/channel/'.format(**connection.__dict__)):
            if not connection.path.endswith(connection.ext):
+              logging.info('Invalid path')
               connection.send_error(404, 'Invalid path: {path}'.format(**connection.__dict__), logging.ERROR)
            name = ensure_text(unquote(os.path.splitext(os.path.basename(connection.path))[0]))
            url = self.channels.get(name)
            if url is None:
+              logging.info('Unknown channel')
               connection.send_error(404, '[%s]: unknown channel: %s' % (self.__class__.__name__, name), logging.ERROR)
            connection.__dict__.update({'channelName': name,
                                        'channelIcon': self.picons.get(name),
