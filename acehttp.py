@@ -479,7 +479,7 @@ except (AssertionError, ValueError):
 
 #### Initial settings for AceHTTPproxy host IP
 if AceConfig.httphost == 'auto':
-   AceConfig.httphost = '192.168.1.8' #get_ip_address()
+   AceConfig.httphost = get_ip_address()
    logger.debug('Ace Stream HTTP Proxy server IP: %s autodetected' % AceConfig.httphost)
 
 # Check whether we can bind to the defined port safely
