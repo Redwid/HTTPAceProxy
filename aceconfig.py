@@ -9,7 +9,7 @@ class AceConfig(acedefconfig.AceDefConfig):
     # ----------------------------------------------------
     #
     # Spawn Ace Stream Engine automatically
-    acespawn = False
+    acespawn = True
     # Ace Stream cmd line (use `--log-file filepath` to write log)
     # You need to set it only on Linux based systems. Autodetect for Windows!
     acecmd = 'sh /acestream.engine/start_acestream_chroot.sh --client-console --live-buffer 300 --vod-buffer 300'
