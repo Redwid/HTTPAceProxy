@@ -19,7 +19,7 @@ tvgurl = 'https://iptvx.one/epg/epg.xml.gz'
 tvgshift = 0
 
 # Download playlist every N minutes to keep it fresh
-updateevery = 180
+updateevery = 0
 
 # Channel playlist template
 # The following values are allowed:

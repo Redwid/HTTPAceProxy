@@ -34,7 +34,7 @@ tvgshift = 0
 
 # Download playlist every N minutes to keep it fresh
 # 0 = disabled
-updateevery = 10
+updateevery = 0
 
 # Channel playlist template
 # The following values are allowed:

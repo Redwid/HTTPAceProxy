@@ -12,7 +12,7 @@ class AceConfig(acedefconfig.AceDefConfig):
     acespawn = False
     # Ace Stream cmd line (use `--log-file filepath` to write log)
     # You need to set it only on Linux based systems. Autodetect for Windows!
-    acecmd = '/opt/acestream/start-engine --client-console --live-buffer 25 --vod-buffer 10'
+    acecmd = 'sh /acestream.engine/start_acestream_chroot.sh --client-console --live-buffer 300 --vod-buffer 300'
     # Ace Stream API key
     # You probably shouldn't touch this
     acekey = 'n51LvQoTlJzNGaFxseRK-uvnvX-sD4Vm5Axwmc4UcoD-jruxmKsuJaH0eVgE'
@@ -124,7 +124,7 @@ class AceConfig(acedefconfig.AceDefConfig):
     logdatefmt = '%d.%m %H:%M:%S'
     # Full path to a log file
     # For Windows OS something like that logfile = "c:\\Python27\\log_AceHttp.txt"
-    logfile = None
+    logfile = '/log/acehttp.log'
     #
     # This method is used to detect fake requests. Some players send such
     # requests in order to detect the MIME type and/or check the stream availability.
