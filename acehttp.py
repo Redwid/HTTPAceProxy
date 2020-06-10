@@ -441,20 +441,21 @@ def get_ip_address():
 
 def check_compatibility(gevent_version, psutil_version):
 
-    if not 'dev' in gevent_version:
-       # Check gevent for compatibility.
-       major, minor, patch = map(int, gevent_version.split('.')[:3])
-       # gevent >= 1.3.3
-       assert major == 1
-       assert minor >= 3
-       assert minor >= 0
-
-    # Check psutil for compatibility.
-    major, minor, patch = map(int, psutil_version.split('.')[:3])
-    # psutil >= 5.3.0
-    assert major == 5
-    assert minor >= 3
-    assert patch >= 0
+    # if not 'dev' in gevent_version:
+    #    # Check gevent for compatibility.
+    #    major, minor, patch = map(int, gevent_version.split('.')[:3])
+    #    # gevent >= 1.3.3
+    #    assert major == 1
+    #    assert minor >= 3
+    #    assert minor >= 3
+    #
+    # # Check psutil for compatibility.
+    # major, minor, patch = map(int, psutil_version.split('.')[:3])
+    # # psutil >= 5.3.0
+    # assert major == 5
+    # assert minor >= 3
+    # assert patch >= 0
+    return
 
 logging.basicConfig(level=AceConfig.loglevel, filename=AceConfig.logfile, format=AceConfig.logfmt, datefmt=AceConfig.logdatefmt)
 logger = logging.getLogger('HTTPServer')
