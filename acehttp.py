@@ -447,7 +447,7 @@ def check_compatibility(gevent_version, psutil_version):
        # gevent >= 1.3.3
        assert major == 1
        assert minor >= 3
-       assert minor >= 3
+       assert minor >= 0
 
     # Check psutil for compatibility.
     major, minor, patch = map(int, psutil_version.split('.')[:3])
