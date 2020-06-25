@@ -58,8 +58,9 @@ class Acetv(object):
 
                         url_search_pattern = requests.utils.re.search(urlpattern, url)
                         if url_search_pattern:
-                            url = url_search_pattern.group(2)
-                            self.channels[name] = 'acestream://{}'.format(url)
+                            #url = url_search_pattern.group(2)
+                            #self.channels[name] = 'acestream://{}'.format(url)
+                            self.channels[name] = url
                             itemdict['url'] = quote(ensure_str(name),'')
 
                         self.playlist.addItem(itemdict)
