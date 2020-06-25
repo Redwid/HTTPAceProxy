@@ -51,6 +51,7 @@ class Acetv(object):
                         group_search_pattern = requests.utils.re.search(group_pattern, name)
                         if group_search_pattern:
                             name = group_search_pattern.group(1).strip()
+                            itemdict['name'] = name
                             itemdict['group'] = group_search_pattern.group(2)
 
                         itemdict['logo'] = self.picons[name] = itemdict.get('logo', picons.logomap.get(name))
