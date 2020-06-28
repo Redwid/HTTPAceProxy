@@ -5,7 +5,6 @@ Rename this file to epg_plugin.py to enable it.
 
 To use it, go to http://127.0.0.1:8000/epg
 '''
-from modules.PluginInterface import AceProxyPlugin
 import os
 import io
 import sys
