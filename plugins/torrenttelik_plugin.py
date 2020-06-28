@@ -19,7 +19,7 @@ import config.picons.torrenttelik as picons
 
 class Torrenttelik(object):
 
-    handlers = ('torrent-telik',)
+    handlers = ('ttv',)
 
     def __init__(self, AceConfig, AceProxy):
         self.picons = self.channels = self.playlist = self.etag = self.last_modified = None

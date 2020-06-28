@@ -27,14 +27,14 @@ proxies = {}
 url = 'http://frytv.pp.ua/frytv.json'
 
 # EPG urls
-tvgurl = 'https://iptvx.one/epg/epg.xml.gz'
+tvgurl = 'http://zen450.local:8008/epg'
 
 # Shift the TV Guide time to the specified number of hours
 tvgshift = 0
 
 # Download playlist every N minutes to keep it fresh
 # 0 = disabled
-updateevery = 0
+updateevery = 10
 
 # Channel playlist template
 # The following values are allowed:

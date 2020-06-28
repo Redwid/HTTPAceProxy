@@ -13,7 +13,7 @@ proxies = {}
 url = 'http://allfon-tv.com/autogenplaylist/allfontv.m3u'
 
 # EPG urls & EPG timeshift
-tvgurl = 'https://iptvx.one/epg/epg.xml.gz'
+tvgurl = 'http://zen450.local:8008/epg'
 
 # Shift the TV Guide time to the specified number of hours
 tvgshift = 0

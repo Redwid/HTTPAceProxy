@@ -27,7 +27,7 @@ logobase = 'http://ttv.world/uploads/'
 fullpathlogo = True
 
 # TV Guide URL
-tvgurl = 'https://iptvx.one/epg/epg.xml.gz'
+tvgurl = 'http://zen450.local:8008/epg'
 
 # Shift the TV Guide time to the specified number of hours
 tvgshift = 0
