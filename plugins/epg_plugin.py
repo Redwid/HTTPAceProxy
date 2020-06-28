@@ -20,7 +20,7 @@ from plugins.epg_filter import EpgFilter
 from utils import schedule, query_get
 
 
-class Epg(AceProxyPlugin):
+class Epg(object):
     handlers = ('epg', )
 
     def __init__(self, AceConfig, AceProxy):
@@ -37,8 +37,8 @@ class Epg(AceProxyPlugin):
             epg_filter = EpgFilter()
             self.epg_all_file_name = epg_filter.download()
 
-        except requests.exceptions.RequestException:
-            logging.error("[%s]: can't download %s playlist!" % (self.__class__.__name__, config.url))
+        except requests.exceptions.RequestException as e:
+            logging.error("[%s]: error in EpgFilter %s" % (self.__class__.__name__, repr(e)))
             return False
         except: logging.error(traceback.format_exc()); return False
 

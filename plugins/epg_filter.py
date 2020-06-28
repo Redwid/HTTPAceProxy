@@ -18,7 +18,7 @@ __author__ = 'Redwid'
 import logging, requests
 
 # M3U url
-m3u_url = 'http://192.168.1.29:8008/ttv
+m3u_url = 'http://192.168.1.29:8008/ttv'
 
 
 # EPG urls
