@@ -153,7 +153,7 @@ class EpgFilter(object):
         for value0 in list:
             if value0.text in list_to_check:
                 value = self.get_value_from_list(value_to_insert, list)
-                if(value is None):
+                if value is None:
                     list.insert(0, NameItem(value_to_insert))
                 else:
                     list.remove(value)
@@ -206,7 +206,7 @@ class EpgFilter(object):
         if not os.path.exists(destination_file_path_cache_folder):
             os.makedirs(destination_file_path_cache_folder)
 
-        get_response = requests.get(url, headers=headers, stream=True, verify=False)
+        get_response = requests.get(url, headers=headers, verify=False, timeout=(5,30))
         if get_response.status_code == 304:
             self.logger.info("download_file() ignore as file 'Not Modified'")
             return file_name_no_gz
