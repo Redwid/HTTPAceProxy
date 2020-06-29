@@ -150,4 +150,5 @@ logomap = {
     u"Сетанта Спорт + HD": logobase + 'X8VE9n2LhKfE67miEWg9VeioeA3QwT.png',
     u'Че': logobase + 'Hv36ZG48lg1mm2wdxAo3ju1EFS41Ga.png',
     u'Ю': logobase + 'YvnG7hXCwMmHnakp2KkCbqeCigHcuK.png',
+    u'CNN': 'http://192.168.1.29:8008/logos?c=cnn'
 }
