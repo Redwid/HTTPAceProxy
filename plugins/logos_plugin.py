@@ -47,7 +47,7 @@ class Logos(object):
     def send_image(self, logo_name, connection):
         self.logger.info("send_image(%s)" % logo_name)
 
-        file_path = 'plugins/config/logos/' + logo_name + '.svg'
+        file_path = 'plugins/config/logos/' + logo_name + '.png'
 
         if not os.path.exists(file_path):
             connection.send_error(404, "Not Found %s" % logo_name)
@@ -55,10 +55,10 @@ class Logos(object):
         with io.open(file_path) as content_file:
             exported = content_file.read()
 
-        response_headers = { 'Content-Type': 'image/svg+xml',
+        response_headers = { 'Content-Type': 'image/png',
                              'Connection': 'close',
                              'Content-Length': len(exported),
-                             'Content-Disposition': 'inline; filename="{}.svg"'.format(logo_name)}
+                             'Content-Disposition': 'inline; filename="{}.png"'.format(logo_name)}
         try:
             h = connection.headers.get('Accept-Encoding').split(',')[0]
             self.logger.info("handle(), header: %s" % h)
