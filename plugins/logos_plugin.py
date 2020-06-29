@@ -2,8 +2,9 @@
 '''
 Logo plugin
 
-Logos source:
+Logos sources:
 https://github.com/Jasmeet181/mediaportal-ru-logos
+https://github.com/zag2me/TheLogoDB/tree/master/Images
 '''
 import os
 
@@ -56,9 +57,7 @@ class Logos(object):
             exported = content_file.read()
 
         response_headers = { 'Content-Type': 'image/png',
-                             'Connection': 'close',
-                             'Content-Length': len(exported),
-                             'Content-Disposition': 'inline; filename="{}.png"'.format(logo_name)}
+                             'Content-Length': len(exported)}
         try:
             h = connection.headers.get('Accept-Encoding').split(',')[0]
             self.logger.info("handle(), header: %s" % h)
@@ -66,8 +65,10 @@ class Logos(object):
                                 'deflate': zlib.compressobj(9, zlib.DEFLATED, -zlib.MAX_WBITS),
                                 'gzip': zlib.compressobj(9, zlib.DEFLATED, zlib.MAX_WBITS | 16)}
             exported = compress_method[h].compress(exported) + compress_method[h].flush()
-            response_headers['Content-Length'] = len(exported)
-            response_headers['Content-Encoding'] = h
+            response_headers = { 'Content-Type': 'image/png',
+                                 'Content-Length': len(exported),
+                                 'Content-Disposition': 'inline; filename="{}.png"'.format(logo_name),
+                                 'Content-Encoding': h }
         except: pass
 
         connection.send_response(200)
