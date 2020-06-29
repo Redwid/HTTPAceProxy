@@ -146,7 +146,7 @@ class EpgFilter(object):
         pass
 
     def get_destination_file_path(self):
-        self.logger.info("[%s]: get_destination_file_path()" % (self.__class__.__name__))
+        self.logger.info("get_destination_file_path()")
         if os.path.isdir(destination_file_path_server):
             return destination_file_path_server
 
@@ -188,7 +188,7 @@ class EpgFilter(object):
         return None
 
     def download_file(self, url, file_name):
-        self.logger.info("[%s]: download_file(%s, %s)" % (self.__class__.__name__, url, file_name))
+        self.logger.info("download_file(%s, %s)" % (url, file_name))
 
         destination_file_path_cache_folder = self.get_destination_file_path() + cache_folder
         file_name = destination_file_path_cache_folder + '/' + file_name
@@ -206,30 +206,30 @@ class EpgFilter(object):
                 if data['last_modified'] != 'None':
                     headers['If-Modified-Since'] = data['last_modified']
 
-        self.logger.info("[%s]: download_file(), destination_file_path_cache_folder: %s" % (self.__class__.__name__, destination_file_path_cache_folder))
+        self.logger.info("download_file(), destination_file_path_cache_folder: %s" % (destination_file_path_cache_folder))
         if not os.path.exists(destination_file_path_cache_folder):
             os.makedirs(destination_file_path_cache_folder)
 
         get_response = requests.get(url, headers=headers, stream=True, verify=False)
         if get_response.status_code == 304:
-            self.logger.info("[%s]: download_file() ignore as file 'Not Modified'" % (self.__class__.__name__))
+            self.logger.info("download_file() ignore as file 'Not Modified'")
             return file_name_no_gz
 
         self.store_last_modified_data(etag_file_name, get_response.headers)
 
-        self.logger.info("[%s]: download_file() downloading file_name: %s" % (self.__class__.__name__, file_name))
+        self.logger.info("download_file() downloading file_name: %s" % (file_name))
         with open(file_name, 'wb') as f:
             for chunk in get_response.iter_content(chunk_size=1024):
                 if chunk:
                     f.write(chunk)
-        self.logger.info("[%s]: download_file done: %s, file size: %d" % (self.__class__.__name__, file_name, os.path.getsize(file_name)))
+        self.logger.info("download_file done: %s, file size: %d" % (file_name, os.path.getsize(file_name)))
         return file_name
 
     def store_last_modified_data(self, file_name, headers):
-        self.logger.info("[%s]: store_last_modified_data(%s)" % (self.__class__.__name__, file_name))
+        self.logger.info("store_last_modified_data(%s)" % (file_name))
 
         data = {'etag': str(headers.get('ETag')), 'last_modified' : str(headers.get('Last-Modified'))}
-        self.logger.info("[%s]: store_last_modified_data(), data: %s" % (self.__class__.__name__, str(data)))
+        self.logger.info("store_last_modified_data(), data: %s" % (str(data)))
         with codecs.open(file_name, 'w', encoding='utf-8') as json_file:
             json_file.write(json.dumps(data))
 
@@ -239,7 +239,7 @@ class EpgFilter(object):
                 data = json.load(json_file)
                 return data
         except:
-            self.logger.error("[%s]: ERROR can\'t read file: %s" % (self.__class__.__name__, file_name))
+            self.logger.error("ERROR can\'t read file: %s" % (file_name))
         return None
 
     def download_m3u(self):
@@ -249,7 +249,7 @@ class EpgFilter(object):
         return file_name
 
     def download_epgs(self):
-        self.logger.info("[%s]: download_epgs()" % (self.__class__.__name__))
+        self.logger.info("download_epgs()")
         index = 1
         downloaded_list = []
         for url in tv_epg_urls:
@@ -267,7 +267,7 @@ class EpgFilter(object):
                     file_name = xml_file_name
 
                 downloaded_list.append(file_name)
-                self.logger.info("[%s]: download_epg(), xml size: %s" % (self.__class__.__name__, self.sizeof_fmt(os.path.getsize(file_name))))
+                self.logger.info("download_epg(), xml size: %s" % (self.sizeof_fmt(os.path.getsize(file_name))))
             except Exception as e:
                 self.logger.error('ERROR in download_epg %s', e)
                 print(e)
@@ -275,7 +275,7 @@ class EpgFilter(object):
         return downloaded_list
 
     def load_xmlt(self, m3u_entries, epg_file, channel_list, programme_list):
-        self.logger.info("[%s]: load_xmlt(%s)" % (self.__class__.__name__, epg_file))
+        self.logger.info("load_xmlt(%s)" % (epg_file))
 
         tree = ET.parse(epg_file)
         root = tree.getroot()
@@ -298,9 +298,8 @@ class EpgFilter(object):
                 program_item = ProgrammeItem(item)
                 programme_list.append(program_item)
 
-        self.logger.info("[%s]: load_xmlt(), channel_list size: %d" % (self.__class__.__name__, len(channel_list)))
-        self.logger.info("[%s]: load_xmlt(), programme_list size: %d" % (self.__class__.__name__, len(programme_list)))
-
+        self.logger.info("load_xmlt(), channel_list size: %d" % (len(channel_list)))
+        self.logger.info("load_xmlt(), programme_list size: %d" % (len(programme_list)))
 
     def merge_values(self, channel_0, channel_1):
         display_name_list_0 = channel_0.display_name_list
@@ -312,14 +311,13 @@ class EpgFilter(object):
         if 'icon' not in display_name_list_0 and 'icon' in display_name_list_1:
             display_name_list_0.icon = display_name_list_1.icon
 
-
     def download_and_parse_m3u(self):
-        self.logger.info("[%s]: download_and_parse_m3u()" % (self.__class__.__name__))
+        self.logger.info("download_and_parse_m3u()")
 
         m3u_entries = []
         for i in range(5):
             m3u_filename = self.download_file(m3u_url, 'm3u.m3u')
-            self.logger.info("[%s]: download_and_parse_m3u() download done: #%d" % (self.__class__.__name__, i))
+            self.logger.info("download_and_parse_m3u() download done: #%d" % (i))
 
             m3u_file = codecs.open(m3u_filename, 'r', encoding='utf-8')
             line = m3u_file.readline()
@@ -344,7 +342,7 @@ class EpgFilter(object):
             m3u_file.close()
             break
 
-        self.logger.info("[%s]: download_and_parse_m3u(), m3u_entries size: %d" % (self.__class__.__name__, len(m3u_entries)))
+        self.logger.info("download_and_parse_m3u(), m3u_entries size: %d" % (len(m3u_entries)))
         return m3u_entries
 
     def is_channel_present_in_m3u(self, channel_item, m3u_entries):
@@ -399,7 +397,7 @@ class EpgFilter(object):
         return False
 
     def write_xml(self, channel_list, programme_list):
-        self.logger.info("[%s]: write_xml()" % (self.__class__.__name__))
+        self.logger.info("write_xml()")
 
         tv = ET.Element("tv")
 
@@ -410,7 +408,7 @@ class EpgFilter(object):
         try:
             channels_tree = ET.ElementTree(tv)
             channels_tree.write(destination_file_path_cache_folder + '/channels.xml', encoding='utf-8', xml_declaration=True)
-            self.logger.info("[%s]: write_xml() channels, %d" % (self.__class__.__name__, len(channel_list)))
+            self.logger.info("write_xml() channels, %d" % (len(channel_list)))
         except Exception as e:
             self.logger.error('ERROR in write_xml()', exc_info=True)
 
@@ -426,7 +424,7 @@ class EpgFilter(object):
 
         tree.write(file_path, encoding='utf-8', xml_declaration=True)
         file_size = os.path.getsize(file_path)
-        self.logger.info("[%s]: write_xml(%s) done, file size: %s" % (self.__class__.__name__, file_path, file_size))
+        self.logger.info("write_xml(%s) done, file size: %s" % (file_path, file_size))
         return file_path
 
     def sizeof_fmt(self, num, suffix='B'):
@@ -437,7 +435,7 @@ class EpgFilter(object):
         return "%.1f%s%s" % (num, 'Yi', suffix)
 
     def load_cached_channels(self, m3u_entries):
-        self.logger.info("[%s]: load_cached_channels()" % (self.__class__.__name__))
+        self.logger.info("load_cached_channels()")
         destination_file_path_cache_folder = self.get_destination_file_path() + cache_folder
 
         counter_cached  = 0
@@ -450,17 +448,19 @@ class EpgFilter(object):
                 channel_in_m3u = self.is_channel_present_in_m3u(channel_item, m3u_entries)
                 if not channel_in_m3u:
                     name = channel_item.get_display_name()
-                    m3u_entries.append(M3uItem('tvg-name="{}" tvg-id="{}",{}'.format(name, channel_item.id, name.text)))
+                    try:
+                        m3u_entries.append(M3uItem('tvg-name="{}" tvg-id="{}",{}'.format(name, channel_item.id, name.text)))
+                    except Exception as e:
+                        self.logger.error('ERROR in load_old_channels()', exc_info=True)
 
-                    self.logger.info("[%s]: load_cached_channels(), channel_in_m3u, name: %s" % (self.__class__.__name__, name))
+                    self.logger.info("load_cached_channels(), channel_in_m3u, name: %s" % (name))
                     counter_cached = counter_cached + 1
         except Exception as e:
             self.logger.error('ERROR in load_old_channels()', exc_info=True)
-        self.logger.info("[%s]: load_cached_channels(), counter_cached: %d" % (self.__class__.__name__, counter_cached))
-
+        self.logger.info("load_cached_channels(), counter_cached: %d" % (counter_cached))
 
     def download(self):
-        self.logger.info("[%s]: download()" % (self.__class__.__name__))
+        self.logger.info("download()")
         #start_time = perf_counter()
 
         all_m3u_entries = self.download_and_parse_m3u()
@@ -473,7 +473,7 @@ class EpgFilter(object):
         for file in downloaded:
             self.load_xmlt(all_m3u_entries, file, channel_list, programme_list)
 
-        self.logger.info("[%s]: Not preset:" % (self.__class__.__name__))
+        self.logger.info("Not preset:")
         counter = 0
         for value in all_m3u_entries:
 
@@ -491,9 +491,9 @@ class EpgFilter(object):
                     break
             if not found:
                 # str_value = str(value)
-                self.logger.info("[%s]:  %s" % (self.__class__.__name__, unicode(value)))
+                self.logger.info("  %s" % (unicode(value)))
                 counter = counter + 1
-        self.logger.info("[%s]: Not preset, counter: %s" % (self.__class__.__name__, str(counter)))
+        self.logger.info("Not preset, counter: %s" % (str(counter)))
 
         # print('Empty:')
         # for programme in programme_list:
