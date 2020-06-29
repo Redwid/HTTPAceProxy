@@ -52,7 +52,7 @@ class Logos(object):
         if not os.path.exists(file_path):
             connection.send_error(404, "Not Found %s" % logo_name)
 
-        with io.open(file_path) as content_file:
+        with io.open(file_path, 'rb') as content_file:
             exported = content_file.read()
 
         response_headers = { 'Content-Type': 'image/png',
