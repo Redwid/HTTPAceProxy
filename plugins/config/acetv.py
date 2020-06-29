@@ -27,7 +27,7 @@ proxies = {}
 url = 'http://acetv.org/list/acetv.18.m3u'
 
 # EPG urls
-tvgurl = 'http://zen450.local:8008/epg'
+tvgurl = 'http://192.168.1.29:8008/epg'
 
 # Shift the TV Guide time to the specified number of hours
 tvgshift = 0

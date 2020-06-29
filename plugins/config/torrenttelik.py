@@ -23,11 +23,12 @@ Playlist format example:
 proxies = {}
 
 # Channels urls or path to file ('file:///path/to/file' or 'file:///C://path//to//file' for Windows OS)
+# Be careful of this: http://91.92.66.82/trash/ttv-list/MyTrafWarn.php
 #url = 'http://pomoyka.win/trash/ttv-list/ace.json'
 url = 'http://91.92.66.82/trash/ttv-list/ace.json'
 
 # EPG urls
-tvgurl = 'http://zen450.local:8008/epg'
+tvgurl = 'http://192.168.1.29:8008/epg'
 
 # Shift the TV Guide time to the specified number of hours
 tvgshift = 0
