@@ -33,25 +33,20 @@ class Logos(object):
         self.AceProxy = AceProxy
 
     def handle(self, connection):
-        path_file_ext = connection.path[connection.path.rfind('.') + 1:]
-        if connection.splittedpath[1] == 'logos' and connection.splittedpath.__len__() == 2:
-            self.logger.info("handle(), path_file_ext: %s" % path_file_ext)
-            query_components = dict(qc.split("=") for qc in connection.query.split("&"))
-            self.logger.info("handle(), query_components: %s" % query_components)
-            if query_components['c']:
-                self.logger.info("handle(), query_components: %s" % query_components['c'])
-                self.send_image(query_components['c'], connection)
-                return
+        if connection.splittedpath[1] == 'logos' and connection.splittedpath.__len__() == 3:
+            self.logger.info("handle(), path: %s" % connection.splittedpath[2])
+            self.send_image(connection, connection.splittedpath[2])
+            return
 
         connection.send_error(404, 'Not Found')
 
-    def send_image(self, logo_name, connection):
-        self.logger.info("send_image(%s)" % logo_name)
+    def send_image(self, connection, logo_file_name):
+        self.logger.info("send_image(%s)" % logo_file_name)
 
-        file_path = 'plugins/config/logos/' + logo_name + '.png'
+        file_path = 'plugins/config/logos/' + logo_file_name
 
         if not os.path.exists(file_path):
-            connection.send_error(404, "Not Found %s" % logo_name)
+            connection.send_error(404, "Not Found %s" % logo_file_name)
 
         with io.open(file_path, 'rb') as content_file:
             exported = content_file.read()
@@ -67,7 +62,7 @@ class Logos(object):
             exported = compress_method[h].compress(exported) + compress_method[h].flush()
             response_headers = { 'Content-Type': 'image/png',
                                  'Content-Length': len(exported),
-                                 'Content-Disposition': 'inline; filename="{}.png"'.format(logo_name),
+                                 'Content-Disposition': 'inline; filename="{}.png"'.format(logo_file_name),
                                  'Content-Encoding': h }
         except: pass
 
@@ -75,4 +70,4 @@ class Logos(object):
         gevent.joinall([gevent.spawn(connection.send_header, k, v) for (k,v) in response_headers.items()])
         connection.end_headers()
         connection.wfile.write(exported)
-        self.logger.info("send_image(), done: %s.svg" % logo_name)
+        self.logger.info("send_image(), done: %s.svg" % logo_file_name)
