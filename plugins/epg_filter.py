@@ -6,9 +6,11 @@ import codecs
 import datetime
 import os
 import json
+import time
+
 from sh import gunzip
-import xml.etree.ElementTree as ET
-#from time import perf_counter
+# import xml.etree.ElementTree as ET #cElementTree using c implementation and works faster
+import xml.etree.cElementTree as ET
 
 
 from plugins.model.model_items import NameItem, ChannelItem, ProgrammeItem, M3uItem
@@ -30,7 +32,6 @@ tv_epg_urls = ['https://iptvx.one/epg/epg.xml.gz',
 # tv_epg_urls = ['http://epg.it999.ru/edem.xml.gz']
 
 # Path to store files
-destination_file_path_server = '/srv/dev-disk-by-label-media/data/epg/'
 destination_file_path_local = './'
 
 # Cache folder
@@ -142,14 +143,10 @@ replacement_map = [
 class EpgFilter(object):
 
     def __init__(self):
-        self.logger = logging.getLogger('epg_plugin_filter')
+        self.logger = logging.getLogger('epg_plugin')
         pass
 
     def get_destination_file_path(self):
-        self.logger.info("get_destination_file_path()")
-        if os.path.isdir(destination_file_path_server):
-            return destination_file_path_server
-
         return destination_file_path_local
 
     def insert_value_if_needed(self, list, list_to_check, value_to_insert):
@@ -165,12 +162,12 @@ class EpgFilter(object):
         return False
 
     def add_custom_entries(self, channel_item):
-        list = channel_item.display_name_list
+        channel_list = channel_item.display_name_list
 
         for item in replacement_map:
-            if self.insert_value_if_needed(list, item[0], item[1]):
+            if self.insert_value_if_needed(channel_list, item[0], item[1]):
                 if item[1] == u'МирТВ':
-                    self.delete_from_list(list, u'Мир HD')
+                    self.delete_from_list(channel_list, u'Мир HD')
                 return
 
         pass
@@ -206,7 +203,6 @@ class EpgFilter(object):
                 if data['last_modified'] != 'None':
                     headers['If-Modified-Since'] = data['last_modified']
 
-        self.logger.info("download_file(), destination_file_path_cache_folder: %s" % (destination_file_path_cache_folder))
         if not os.path.exists(destination_file_path_cache_folder):
             os.makedirs(destination_file_path_cache_folder)
 
@@ -248,38 +244,46 @@ class EpgFilter(object):
         self.logger.info('download_m3u() done')
         return file_name
 
-    def download_epgs(self):
-        self.logger.info("download_epgs()")
+    def download_all_epgs(self):
+        self.logger.info("download_all_epgs()")
+        start_time = time.time()
         index = 1
         downloaded_list = []
         for url in tv_epg_urls:
-            file_result = []
-            file_result.append("epg #" + str(index))
-            try:
-                file_name = 'epg-' + str(index) + '.xml.gz'
-                file_name = self.download_file(url, file_name)
-
-                if file_name.endswith('.gz'):
-                    xml_file_name = file_name.replace('.gz', '')
-                    if os.path.exists(xml_file_name):
-                        os.remove(xml_file_name)
-                    gunzip(file_name)
-                    file_name = xml_file_name
-
-                downloaded_list.append(file_name)
-                self.logger.info("download_epg(), xml size: %s" % (self.sizeof_fmt(os.path.getsize(file_name))))
-            except Exception as e:
-                self.logger.error('ERROR in download_epg %s', e)
-                print(e)
+            self.download_epg(index, url, downloaded_list)
             index = index + 1
+        self.logger.info("download_all_epgs(), done, time: %sms" % (time.time() - start_time))
         return downloaded_list
 
-    def load_xmlt(self, m3u_entries, epg_file, channel_list, programme_list):
-        self.logger.info("load_xmlt(%s)" % (epg_file))
+    def download_epg(self, index, url, downloaded_list):
+        self.logger.info("download_epg(%s)" % url)
+        start_time = time.time()
+        file_name = 'epg-' + str(index) + '.xml.gz'
+        try:
+            file_name = self.download_file(url, file_name)
 
+            if file_name.endswith('.gz'):
+                xml_file_name = file_name.replace('.gz', '')
+                if os.path.exists(xml_file_name):
+                    os.remove(xml_file_name)
+                gunzip(file_name)
+                file_name = xml_file_name
+
+            downloaded_list.append(file_name)
+        except Exception as e:
+            self.logger.error('ERROR in download_epg(%s) %s' % (url, e))
+        self.logger.info("download_epg(%s), xml size: %s, time: %sms" % (url, self.sizeof_fmt(os.path.getsize(file_name)), time.time() - start_time))
+
+    def load_xmlt(self, m3u_entries, epg_file, channel_list, programme_list):
+        self.logger.info("load_xmlt(%s)" % epg_file)
+        start_time = time.time()
+
+        start_time_0 = time.time()
         tree = ET.parse(epg_file)
         root = tree.getroot()
+        self.logger.info("load_xmlt(%s), parsing, time: %sms " % (epg_file, time.time() - start_time_0))
 
+        start_time_0 = time.time()
         for item in root.findall('./channel'):
             channel_item = ChannelItem(item)
 
@@ -292,14 +296,16 @@ class EpgFilter(object):
 
             # if value is not None and channel_in_m3u:
             #     merge_values(value, channel_item)
+        self.logger.info("load_xmlt(%s), channel parsing, time: %sms " % (epg_file, time.time() - start_time_0))
 
+        start_time_0 = time.time()
         for item in root.findall('./programme'):
             if self.is_channel_present_in_list_by_id(channel_list, item.attrib['channel']):
                 program_item = ProgrammeItem(item)
                 programme_list.append(program_item)
+        self.logger.info("load_xmlt(%s), programme parsing, time: %sms " % (epg_file, time.time() - start_time_0))
 
-        self.logger.info("load_xmlt(), channel_list size: %d" % (len(channel_list)))
-        self.logger.info("load_xmlt(), programme_list size: %d" % (len(programme_list)))
+        self.logger.info("load_xmlt(%s), channel_list size: %d, programme_list: %d, time: %sms " % (epg_file, len(channel_list), len(programme_list), time.time() - start_time))
 
     def merge_values(self, channel_0, channel_1):
         display_name_list_0 = channel_0.display_name_list
@@ -424,7 +430,7 @@ class EpgFilter(object):
 
         tree.write(file_path, encoding='utf-8', xml_declaration=True)
         file_size = os.path.getsize(file_path)
-        self.logger.info("write_xml(%s) done, file size: %s" % (file_path, file_size))
+        self.logger.info("write_xml(%s) done, file size: %s (%s)" % (file_path, file_size, self.sizeof_fmt(file_size)))
         return file_path
 
     def sizeof_fmt(self, num, suffix='B'):
@@ -438,7 +444,7 @@ class EpgFilter(object):
         self.logger.info("load_cached_channels()")
         destination_file_path_cache_folder = self.get_destination_file_path() + cache_folder
 
-        counter_cached  = 0
+        counter_cached = 0
         try:
             tree = ET.parse(destination_file_path_cache_folder + '/channels.xml')
             root = tree.getroot()
@@ -461,12 +467,12 @@ class EpgFilter(object):
 
     def download(self):
         self.logger.info("download()")
-        #start_time = perf_counter()
+        start_time = time.time()
 
         all_m3u_entries = self.download_and_parse_m3u()
         self.load_cached_channels(all_m3u_entries)
 
-        downloaded = self.download_epgs()
+        downloaded = self.download_all_epgs()
 
         channel_list = []
         programme_list = []
@@ -511,6 +517,5 @@ class EpgFilter(object):
 
         file_path = self.write_xml(channel_list, programme_list)
 
-        #all_time = (perf_counter() - start_time)
-        #self.logger.info("download(), done in: %s", str(all_time))
+        self.logger.info("download(), done in: %s" % (time.time() - start_time))
         return file_path
