@@ -151,10 +151,14 @@ class Torrenttelik(object):
     def get_logo(self, name):
         logo_url = picons.logomap.get(name)
         if logo_url is None:
-            logo_url = u'http://{}/logos/{}.png'.format(self.AceConfig.httphost, name)
+            logo_url = u'http://{}:{}/logos/{}.png'.format(self.AceConfig.httphost, self.get_port(), name)
         return logo_url
 
     def get_epg_url(self, tvgurl):
-        if config_epg.updateevery != 0:
-            return 'http://{}:{}/epg'.format(self.AceConfig.httphost, self.AceConfig.httpport)
+        if config_epg.updateevery > 0:
+            return 'http://{}:{}/epg'.format(self.AceConfig.httphost, self.get_port())
         return tvgurl
+
+    def get_port(self):
+        return '8008'#if running from docker that needs to be of exported port your docker container
+        #return self.AceConfig.httpport
