@@ -14,6 +14,7 @@ from urllib3.packages.six import ensure_str, ensure_text, ensure_binary
 from PlaylistGenerator import PlaylistGenerator
 from requests_file import FileAdapter
 from utils import schedule, query_get
+import config.epg_filter as config_epg
 import config.torrenttelik as config
 import config.picons.torrenttelik as picons
 
@@ -22,10 +23,11 @@ class Torrenttelik(object):
     handlers = ('ttv',)
 
     def __init__(self, AceConfig, AceProxy):
+        self.AceConfig = AceConfig
         self.picons = self.channels = self.playlist = self.etag = self.last_modified = None
         self.playlisttime = gevent.time.time()
         self.headers = {'User-Agent': 'Magic Browser'}
-        if config.updateevery: schedule(config.updateevery * 60, self.Playlistparser)
+        if config.updateevery: schedule(0, config.updateevery * 60, self.Playlistparser)
 
     def Playlistparser(self):
         try:
@@ -50,7 +52,7 @@ class Torrenttelik(object):
                                name = channel['name']
                                url = 'acestream://{url}'.format(**channel)
                                channel['group'] = channel.pop('cat')
-                               channel['logo'] = self.picons[name] = channel.get('logo', picons.logomap.get(name))
+                               channel['logo'] = self.picons[name] = channel.get('logo', self.get_logo(name))
 
                                if requests.utils.re.search(urlpattern, url):
                                   self.channels[name] = url
@@ -125,7 +127,7 @@ class Torrenttelik(object):
         else:
            exported = self.playlist.exportm3u( hostport=connection.headers['Host'],
                                                path='' if not self.channels else '/{reqtype}/channel'.format(**connection.__dict__),
-                                               header=config.m3uheadertemplate,
+                                               header=config.m3uheadertemplate.format(self.get_epg_url(config.tvgurl), config.tvgshift),
                                                query=connection.query
                                               )
            response_headers = {'Content-Type': 'audio/mpegurl; charset=utf-8', 'Connection': 'close', 'Access-Control-Allow-Origin': '*'}
@@ -145,3 +147,14 @@ class Torrenttelik(object):
            connection.end_headers()
            connection.wfile.write(exported)
            logging.debug('[%s]: plugin sent playlist to [%s]' % (self.__class__.__name__, connection.clientip))
+
+    def get_logo(self, name):
+        logo_url = picons.logomap.get(name)
+        if logo_url is None:
+            logo_url = u'http://{}/logos/{}.png'.format(self.AceConfig.httphost, name)
+        return logo_url
+
+    def get_epg_url(self, tvgurl):
+        if config_epg.updateevery != 0:
+            return 'http://{}:{}/epg'.format(self.AceConfig.httphost, self.AceConfig.httpport)
+        return tvgurl

@@ -19,10 +19,6 @@ __author__ = 'Redwid'
 
 import logging, requests
 
-# M3U url
-m3u_url = 'http://192.168.1.29:8008/ttv'
-
-
 # EPG urls
 tv_epg_urls = ['https://iptvx.one/epg/epg.xml.gz',
                'http://www.teleguide.info/download/new3/xmltv.xml.gz',
@@ -142,7 +138,8 @@ replacement_map = [
 
 class EpgFilter(object):
 
-    def __init__(self):
+    def __init__(self, AceConfig, AceProxy):
+        self.AceConfig = AceConfig
         self.logger = logging.getLogger('epg_plugin')
         pass
 
@@ -215,7 +212,7 @@ class EpgFilter(object):
 
         self.logger.info("download_file() downloading file_name: %s" % (file_name))
         with open(file_name, 'wb') as f:
-            for chunk in get_response.iter_content(chunk_size=1024):
+            for chunk in get_response.iter_content(chunk_size=1024*1024):
                 if chunk:
                     f.write(chunk)
         self.logger.info("download_file done: %s, file size: %d" % (file_name, os.path.getsize(file_name)))
@@ -238,9 +235,12 @@ class EpgFilter(object):
             self.logger.error("ERROR can\'t read file: %s" % (file_name))
         return None
 
+    def get_m3u_url(self):
+        return 'http://{}:{}/ttv'.format(self.AceConfig.httphost, self.AceConfig.httpport)
+
     def download_m3u(self):
         self.logger.info('download_m3u()')
-        file_name = self.download_file(m3u_url, 'm3u.m3u')
+        file_name = self.download_file(self.get_m3u_url(), 'm3u.m3u')
         self.logger.info('download_m3u() done')
         return file_name
 
@@ -322,7 +322,7 @@ class EpgFilter(object):
 
         m3u_entries = []
         for i in range(5):
-            m3u_filename = self.download_file(m3u_url, 'm3u.m3u')
+            m3u_filename = self.download_file(self.get_m3u_url(), 'm3u.m3u')
             self.logger.info("download_and_parse_m3u() download done: #%d" % (i))
 
             m3u_file = codecs.open(m3u_filename, 'r', encoding='utf-8')

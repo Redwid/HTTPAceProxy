@@ -24,17 +24,19 @@ class Epg(object):
     handlers = ('epg', )
 
     def __init__(self, AceConfig, AceProxy):
+        self.AceConfig = AceConfig
+        self.AceProxy = AceProxy
         self.logger = logging.getLogger('epg_plugin')
         self.epg_all_file_name = None
         self.etag = None
         self.headers = {'User-Agent': 'Magic Browser'}
         if config.updateevery:
-            schedule(config.updateevery * 60, self.download_and_filter)
+            schedule(60, config.updateevery * 60, self.download_and_filter)
         pass
 
     def download_and_filter(self):
         try:
-            epg_filter = EpgFilter()
+            epg_filter = EpgFilter(self.AceConfig, self.AceProxy)
             self.epg_all_file_name = epg_filter.download()
             self.last_time = gevent.time.time()
         except requests.exceptions.RequestException as e:

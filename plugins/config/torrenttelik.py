@@ -28,7 +28,7 @@ proxies = {}
 url = 'http://91.92.66.82/trash/ttv-list/ace.json'
 
 # EPG urls
-tvgurl = 'http://192.168.1.29:8008/epg'
+tvgurl = 'https://iptvx.one/epg/epg.xml.gz'
 
 # Shift the TV Guide time to the specified number of hours
 tvgshift = 0

@@ -105,14 +105,15 @@ class HTTPHandler(BaseHTTPRequestHandler):
         self.path = self.path.rstrip('/')
         # Pretend to work fine with Fake or HEAD request.
         if self.command == 'HEAD' or AceConfig.isFakeRequest(self.path, self.query, self.headers):
-           # Return 200 and exit
-           if self.command != 'HEAD': self.command = 'FAKE'
-           logging.debug('[{clientip}]: {command} request: send headers and close the connection'.format(**self.__dict__))
-           self.send_response(200)
-           self.send_header('Content-Type', 'video/mp2t')
-           self.send_header('Connection', 'Close')
-           self.end_headers()
-           return
+           if '/logos/' not in self.path:
+               # Return 200 and exit
+               if self.command != 'HEAD': self.command = 'FAKE'
+               logging.debug('[{clientip}]: {command} request: send headers and close the connection'.format(**self.__dict__))
+               self.send_response(200)
+               self.send_header('Content-Type', 'video/mp2t')
+               self.send_header('Connection', 'Close')
+               self.end_headers()
+               return
 
         try:
            self.splittedpath = self.path.split('/')
