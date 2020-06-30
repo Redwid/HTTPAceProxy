@@ -94,7 +94,6 @@ logomap = {
     u"Россия 24": logobase + 'LWfGV6eICPYL7psaBfw2dOgGrOtHFS.png',
     u"Cartoon network": logobase + 'NTNQLLri3Hh9iqYjW7VEkFYJsTLjk9.png',
     u"Nick Jr": logobase + 'D87kJ3fIWIm5wKi5qxm24nbuPQv0U8.png',
-    u"В гостях у сказки": logobase + 'N076JCPKNaCl1T8ANnskFElL4t4uE8.png',
     u"Канал Disney": logobase + 'JxEjTeXwExjnxutQGKJBmMI85tpNqK.png',
     u"Канал О!": logobase + 'zHhfMQhsdu59e6puujg0qHt1675jYO.png',
     u"Карусель": logobase + 'S233D4b6eq7KOXfdyi4dY2GokKeltg.png',
