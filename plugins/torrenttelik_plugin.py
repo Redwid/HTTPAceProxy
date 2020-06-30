@@ -150,7 +150,9 @@ class Torrenttelik(object):
 
     def get_logo(self, name):
         logo_url = picons.logomap.get(name)
+
         if logo_url is None:
+            name = name.replace(" ", "_").lower()
             logo_url = u'http://{}:{}/logos/{}.png'.format(self.get_ip(), self.get_port(), name)
         return logo_url
 
