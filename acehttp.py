@@ -504,7 +504,7 @@ AceProxy.ace = findProcess('ace_engine.exe' if AceConfig.osplatform == 'Windows'
 if not AceProxy.ace and AceConfig.acespawn:
    if spawnAce():
       logger.info('Local AceStream engine spawned with pid %s' % AceProxy.ace.pid)
-      schedule(AceConfig.acestartuptimeout, checkAce) # Start AceEngine alive watchdog
+      schedule(0, AceConfig.acestartuptimeout, checkAce) # Start AceEngine alive watchdog
 elif AceProxy.ace:
    AceProxy.ace = psutil.Process(AceProxy.ace)
    logger.info('Local AceStream engine found with pid %s' % AceProxy.ace.pid)
