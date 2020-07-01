@@ -7,7 +7,6 @@ Torrent-telik channels picon
 logobase = 'http://ttv.pp.ua/picons/'
 # Channels logo/path mapping
 logomap = {
-    u"24Техно": logobase + 'JbUGHLuuZa3WQbjtbzUo0cDZkGnLRK.png',
     u"365 дней ТВ": logobase + '0IZrVwoxtmjtgnWu5Dj4Hb8FRc8NIX.png',
 #    u"Animal Family HD": logobase + '',
     u"Animal Planet HD": logobase + '45.png',
@@ -89,7 +88,6 @@ logomap = {
     u"Playboy TV": logobase + 'lIWBxmt5GDl9tg4KsQNtA0CuZWdOHH.png',
     u"НЮ АРТ": logobase + 'aqMIuUixqLQYmJITPnOGtFkRPuTqKa.png',
     u"Русская ночь": logobase + '9Sh9bJuj6js5AJsypAd6UvwnsIB25R.png',
-    u"EuroNews": logobase + 'Vb3fP5gUK0q40WuzYeUhMT7RQmDg27.png',
     u"Москва-24": logobase + 'dZcmoqRoZLhCBh8BE4RnbQivuDY6hH.png',
     u"Россия 24": logobase + 'LWfGV6eICPYL7psaBfw2dOgGrOtHFS.png',
     u"Cartoon network": logobase + 'NTNQLLri3Hh9iqYjW7VEkFYJsTLjk9.png',

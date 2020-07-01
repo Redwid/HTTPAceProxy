@@ -56,7 +56,7 @@ class Epg(object):
         with io.open(self.epg_all_file_name, encoding='utf-8') as content_file:
             exported = content_file.read().encode('utf-8')
 
-        response_headers = { 'Content-Type': 'application/octet-stream',
+        response_headers = { 'Content-Type': 'text/html',
                              'Connection': 'close',
                              'Content-Length': len(exported),
                              'Content-Disposition': 'inline; filename="epg-all.xml"'}

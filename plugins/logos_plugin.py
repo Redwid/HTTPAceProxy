@@ -54,6 +54,7 @@ class Logos(object):
         file_path = 'plugins/config/logos/' + logo_file_name
 
         if not os.path.exists(file_path):
+            self.logger.error("send_image_info(%s) not found" % logo_file_name)
             connection.send_error(404, "Not Found %s" % logo_file_name)
 
         response_headers = { 'Content-Type': 'image/png',
@@ -73,6 +74,7 @@ class Logos(object):
         file_path = 'plugins/config/logos/' + logo_file_name
 
         if not os.path.exists(file_path):
+            self.logger.error("send_image_info(%s) not found" % logo_file_name)
             connection.send_error(404, "Not Found %s" % logo_file_name)
 
         with io.open(file_path, 'rb') as content_file:
