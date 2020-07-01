@@ -47,7 +47,7 @@ class Epg(object):
         return True
 
     def handle(self, connection):
-        self.logger.info("handle()")
+        self.logger.info("handle(), headers: %s" % connection.headers)
 
         # config.updateevery * 60 minutes cache
         if not self.epg_all_file_name or not os.path.exists(self.epg_all_file_name) or (gevent.time.time() - self.last_time > config.updateevery * 60):
