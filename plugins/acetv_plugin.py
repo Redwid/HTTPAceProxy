@@ -13,15 +13,16 @@ from urllib3.packages.six.moves.urllib.parse import urlparse, quote, unquote
 from urllib3.packages.six import ensure_str, ensure_text, ensure_binary
 from PlaylistGenerator import PlaylistGenerator
 from requests_file import FileAdapter
-from utils import schedule, query_get
+from utils import schedule, query_get, get_epg_url, get_logo
 import config.acetv as config
-import config.picons.allfon as picons
+import config.picons.torrenttelik as picons
 
 class Acetv(object):
 
     handlers = ('acetv',)
 
     def __init__(self, AceConfig, AceProxy):
+        self.AceConfig = AceConfig
         self.picons = self.channels = self.playlist = self.etag = self.last_modified = None
         self.playlisttime = gevent.time.time()
         self.headers = {'User-Agent': 'Magic Browser'}
@@ -54,11 +55,11 @@ class Acetv(object):
                             itemdict['name'] = name
                             itemdict['group'] = group_search_pattern.group(2)
 
-                        itemdict['logo'] = self.picons[name] = itemdict.get('logo', picons.logomap.get(name))
+                        itemdict['logo'] = self.picons[name] = itemdict.get('logo', get_logo(self.AceConfig, picons.logomap, name))
 
                         url_search_pattern = requests.utils.re.search(urlpattern, url)
                         if url_search_pattern:
-                            url = 'acestream://{}'.format(url_search_pattern.group(2))
+                            #url = 'acestream://{}'.format(url_search_pattern.group(2))
                             self.channels[name] = url
                             itemdict['url'] = quote(ensure_str(name),'')
 
@@ -111,7 +112,7 @@ class Acetv(object):
         else:
             exported = self.playlist.exportm3u( hostport=connection.headers['Host'],
                                                 path='' if not self.channels else '/{reqtype}/channel'.format(**connection.__dict__),
-                                                header=config.m3uheadertemplate,
+                                                header=config.m3uheadertemplate.format(get_epg_url(self.AceConfig, config, config.tvgurl), config.tvgshift),
                                                 query=connection.query
                                                 )
             response_headers = {'Content-Type': 'audio/mpegurl; charset=utf-8', 'Connection': 'close', 'Access-Control-Allow-Origin': '*'}

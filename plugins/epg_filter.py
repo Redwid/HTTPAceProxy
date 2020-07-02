@@ -20,6 +20,7 @@ __author__ = 'Redwid'
 import logging, requests
 
 # EPG urls
+# http://epg.ott-play.com/
 tv_epg_urls = ['https://iptvx.one/epg/epg.xml.gz',
                'http://www.teleguide.info/download/new3/xmltv.xml.gz',
                'http://programtv.ru/xmltv.xml.gz',

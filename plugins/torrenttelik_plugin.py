@@ -13,7 +13,7 @@ from urllib3.packages.six.moves.urllib.parse import urlparse, quote, unquote
 from urllib3.packages.six import ensure_str, ensure_text, ensure_binary
 from PlaylistGenerator import PlaylistGenerator
 from requests_file import FileAdapter
-from utils import schedule, query_get
+from utils import schedule, query_get, get_logo, get_epg_url
 import config.epg_filter as config_epg
 import config.torrenttelik as config
 import config.picons.torrenttelik as picons
@@ -52,7 +52,7 @@ class Torrenttelik(object):
                                name = channel['name']
                                url = 'acestream://{url}'.format(**channel)
                                channel['group'] = channel.pop('cat')
-                               channel['logo'] = self.picons[name] = channel.get('logo', self.get_logo(name))
+                               channel['logo'] = self.picons[name] = channel.get('logo', get_logo(self.AceConfig, picons.logomap, name))
 
                                if requests.utils.re.search(urlpattern, url):
                                   self.channels[name] = url
@@ -127,7 +127,7 @@ class Torrenttelik(object):
         else:
            exported = self.playlist.exportm3u( hostport=connection.headers['Host'],
                                                path='' if not self.channels else '/{reqtype}/channel'.format(**connection.__dict__),
-                                               header=config.m3uheadertemplate.format(self.get_epg_url(config.tvgurl), config.tvgshift),
+                                               header=config.m3uheadertemplate.format(get_epg_url(self.AceConfig, config, config.tvgurl), config.tvgshift),
                                                query=connection.query
                                               )
            response_headers = {'Content-Type': 'audio/mpegurl; charset=utf-8', 'Connection': 'close', 'Access-Control-Allow-Origin': '*'}
@@ -147,24 +147,3 @@ class Torrenttelik(object):
            connection.end_headers()
            connection.wfile.write(exported)
            logging.debug('[%s]: plugin sent playlist to [%s]' % (self.__class__.__name__, connection.clientip))
-
-    def get_logo(self, name):
-        logo_url = picons.logomap.get(name)
-
-        if logo_url is None:
-            name = name.replace(" ", "_").lower()
-            logo_url = u'http://{}:{}/logos/{}.png'.format(self.get_ip(), self.get_port(), name)
-        return logo_url
-
-    def get_epg_url(self, tvgurl):
-        if config_epg.updateevery > 0:
-            return 'http://{}:{}/epg'.format(self.get_ip(), self.get_port())
-        return tvgurl
-
-    def get_ip(self):
-        return '192.168.1.29'#
-        #return self.AceConfig.httphost
-
-    def get_port(self):
-        return '8008'#if running from docker that needs to be of exported port your docker container
-        #return self.AceConfig.httpport
