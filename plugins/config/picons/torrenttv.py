@@ -897,7 +897,6 @@ logomap = {
     u'Вместе РФ': logobase + 'qa50GYekwBWym7KtoJdzrWHWqN8TeU.png',
     u'Возрождение ТВ': logobase + 'CKWaxJsLQYiJmnkLhtysIn8hb0NK8b.png',
     u'Волгоград 1': logobase + 'cASK2Zie0mQrpgvrUjQHVdwFUgjddX.png',
-    u'Вопросы и Oтветы': logobase + 'VkkEcZ1m9h8HRcQyF9azGHv1ZMGIBl.png',
     u'Восток 24 HD': logobase + 'lsPwiihTgSjp4xKzSgbPYxw0fFq3Ae.png',
     u'Время': logobase + 'F44yKDJQLsX0llpZ2wupg8V5vHx5fF.png',
     u'ВРТ Электросталь': logobase + 'h3QwjBFnhiISjLNiCgK8g2wv1PVtGI.png',

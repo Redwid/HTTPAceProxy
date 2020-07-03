@@ -24,7 +24,6 @@ logomap = {
     u'Viasat Explore': logobase + 'uCqpsdKP0ialUUYxUk2fXshYdYfxzW.png',
     u'Авто Плюс': logobase + 'WkRxjy6fJEBJ5NZiaGn2j05eqfFfQq.png',
     u'Бобёр': logobase + '2Edln8vEbg7UUSVUo7lIJPR780OWAR.png',
-    u'Вопросы и ответы': logobase + 'VkkEcZ1m9h8HRcQyF9azGHv1ZMGIBl.png',
     u'Время': logobase + 'F44yKDJQLsX0llpZ2wupg8V5vHx5fF.png',
     u'Детский мир': logobase + '00Vf3rPABNnbNQ6Rv0dnfcg3JsJelA.png',
     u'Дом кино': logobase + 'jlC78Fy13KWjQUN6l3FtbsRLZDvc0x.png',
