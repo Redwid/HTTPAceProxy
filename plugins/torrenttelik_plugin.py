@@ -52,7 +52,7 @@ class Torrenttelik(object):
                                name = channel['name']
                                url = 'acestream://{url}'.format(**channel)
                                channel['group'] = channel.pop('cat')
-                               channel['logo'] = self.picons[name] = channel.get('logo', get_logo(self.AceConfig, picons.logomap, name))
+                               channel['logo'] = self.picons[name] = channel.get('logo', get_logo(picons.logomap, name))
 
                                if requests.utils.re.search(urlpattern, url):
                                   self.channels[name] = url
