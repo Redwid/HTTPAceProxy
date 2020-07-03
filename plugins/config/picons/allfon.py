@@ -78,8 +78,6 @@ logomap = {
     u'Русский Экстрим': logobase + 'upndVpIdjY3vb5vrituof5UcKISNcQ.png',
     u'Санкт-Петербург': logobase + 'sb81YtPOvlHidztMnC5tZPSKkb1uMI.png',
     u'СТС': logobase + 'is620Pu6DreVLLnpHkpcXXZC9PI2Hi.png',
-    u'СТС Love': logobase + 'r0vFnRWru2IPjGSsln31IhJ87r8m9l.png',
-    u'ТВ Центр': logobase + 'QEpQTskZ9hcfI0rgD8osHVYSv58pde.png',
     u'ТВ3': logobase + '07bjT0brQLyETHscCfGFtvsdaRiUdH.png',
     u'ТНТ': logobase + 'Vtt1KKIpLY4LTQGnV03sdBYyX3hyWR.png',
     u'ТНТ4': logobase + 'yTclqOAW0EWwhw9vt0spVSUcS70ZR0.png',
