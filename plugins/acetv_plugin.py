@@ -55,12 +55,12 @@ class Acetv(object):
                             itemdict['name'] = name
                             itemdict['group'] = group_search_pattern.group(2)
 
-                        itemdict['logo'] = self.picons[name] = itemdict.get('logo', get_logo(self.AceConfig, picons.logomap, name))
+                        itemdict['logo'] = self.picons[name] = itemdict.get('logo', get_logo(picons.logomap, name))
 
                         url_search_pattern = requests.utils.re.search(urlpattern, url)
                         if url_search_pattern:
                             #url = 'acestream://{}'.format(url_search_pattern.group(2))
-                            self.channels[name] = url
+                            self.channels[name] = url.replace('127.0.0.1', '192.168.1.4')
                             itemdict['url'] = quote(ensure_str(name),'')
 
                         self.playlist.addItem(itemdict)
@@ -110,9 +110,10 @@ class Acetv(object):
             return
 
         else:
-            exported = self.playlist.exportm3u( hostport=connection.headers['Host'],
+            host_port = connection.headers['Host']
+            exported = self.playlist.exportm3u( hostport=host_port,
                                                 path='' if not self.channels else '/{reqtype}/channel'.format(**connection.__dict__),
-                                                header=config.m3uheadertemplate.format(get_epg_url(self.AceConfig, config, config.tvgurl), config.tvgshift),
+                                                header=config.m3uheadertemplate.format(get_epg_url(host_port, config, config.tvgurl), config.tvgshift),
                                                 query=connection.query
                                                 )
             response_headers = {'Content-Type': 'audio/mpegurl; charset=utf-8', 'Connection': 'close', 'Access-Control-Allow-Origin': '*'}

@@ -92,6 +92,10 @@ class PlaylistGenerator(object):
                   params.update({'value': url})
                   item['url'] = urlunparse(u'{schema};{netloc};/channels/play;;id={value};'.format(**params).split(';'))
 
+            logo_url = item['logo']
+            if logo_url is not None:
+                  item['logo'] = logo_url.replace('127.0.0.1', params.get('hostport'))
+
             return self.m3uchanneltemplate.format(**item)
         params.update({'schema': 'http', 'netloc': params.get('hostport'), 'ext': query_get(params.get('query',''), 'ext', 'ts')})
         return ensure_binary(params.get('header', self.m3uemptyheader if params.get('empty_header') else self.m3uheader) + ''.join(map(line_generator, self.sort(self.itemlist))))

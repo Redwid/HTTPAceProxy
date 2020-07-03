@@ -125,9 +125,10 @@ class Torrenttelik(object):
            return
 
         else:
-           exported = self.playlist.exportm3u( hostport=connection.headers['Host'],
+           host_port = connection.headers['Host']
+           exported = self.playlist.exportm3u( hostport=host_port,
                                                path='' if not self.channels else '/{reqtype}/channel'.format(**connection.__dict__),
-                                               header=config.m3uheadertemplate.format(get_epg_url(self.AceConfig, config, config.tvgurl), config.tvgshift),
+                                               header=config.m3uheadertemplate.format(get_epg_url(host_port, config, config.tvgurl), config.tvgshift),
                                                query=connection.query
                                               )
            response_headers = {'Content-Type': 'audio/mpegurl; charset=utf-8', 'Connection': 'close', 'Access-Control-Allow-Origin': '*'}
