@@ -54,7 +54,6 @@ logomap = {
     u"Armenia TV": logobase + 'M4UAMT6cEyL3zuim9fzy38vZRkIfKq.png',
     u"ICTV": logobase + 'YuNtYxhj9vqgTU9kVuz9imhqviY4PZ.png',
 #    u"LNK": logobase + '',
-    u"LRT": logobase + 'iT3NgoFBu7R4wQ0yDQ9WQsMMJQfIh0.png',
     u"RTVi": logobase + '8grb3H6aQ5XVf9Vouy01qGvirehQvW.png',
     u"Shant HD": logobase + '2CmRmYOEq9RADmLInEL28WVzdgvYnu.png',
 #    u"Астана ТВ": logobase + '',
