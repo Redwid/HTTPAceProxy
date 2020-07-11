@@ -205,13 +205,14 @@ class EpgFilter(object):
             os.makedirs(destination_file_path_cache_folder)
 
         get_response = requests.get(url, headers=headers, verify=False, timeout=(5,30))
+        self.logger.info("download_file(), response: %s" % get_response)
         if get_response.status_code == 304:
             self.logger.info("download_file() ignore as file 'Not Modified'")
             return file_name_no_gz
 
         self.store_last_modified_data(etag_file_name, get_response.headers)
 
-        self.logger.info("download_file() downloading file_name: %s" % (file_name))
+        self.logger.info("download_file() downloading file_name: %s" % file_name)
         with open(file_name, 'wb') as f:
             for chunk in get_response.iter_content(chunk_size=1024*1024):
                 if chunk:
@@ -480,7 +481,7 @@ class EpgFilter(object):
         for file in downloaded:
             self.load_xmlt(all_m3u_entries, file, channel_list, programme_list)
 
-        self.logger.info("Not preset:")
+        self.logger.info("download(), Not preset:")
         counter = 0
         for value in all_m3u_entries:
 
@@ -498,9 +499,9 @@ class EpgFilter(object):
                     break
             if not found:
                 # str_value = str(value)
-                self.logger.info("  %s" % (unicode(value)))
+                self.logger.info("            %s" % (unicode(value)))
                 counter = counter + 1
-        self.logger.info("Not preset, counter: %s" % (str(counter)))
+        self.logger.info("download(), Not preset, counter: %s" % (str(counter)))
 
         # print('Empty:')
         # for programme in programme_list:

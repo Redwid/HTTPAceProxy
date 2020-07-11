@@ -1,6 +1,8 @@
 '''
 Various commonly used functions
 '''
+import hashlib
+
 __author__ = 'Dorik1972'
 
 from gevent import spawn_later, getcurrent
@@ -33,3 +35,12 @@ def get_epg_url(host_port, config_epg, tvgurl):
     if config_epg.updateevery > 0:
         return 'http://{}/epg'.format(host_port)
     return tvgurl
+
+
+def md5(file_path):
+    hash_md5 = hashlib.md5()
+    with open(file_path, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    return hash_md5.hexdigest()
+

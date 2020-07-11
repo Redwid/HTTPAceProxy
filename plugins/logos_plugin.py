@@ -13,6 +13,8 @@ import urllib
 import gevent
 import io
 
+from modules.utils import md5
+
 __author__ = 'Redwid'
 
 import time, zlib
@@ -61,7 +63,7 @@ class Logos(object):
                              'Accept-Ranges': 'bytes',
                              'Content-Length': os.path.getsize(file_path),
                              'Last-Modified': time.ctime(os.path.getmtime(file_path)),
-                             'ETag': self.md5(file_path),
+                             'ETag': md5(file_path),
                              'Connection': 'Close'}
 
         connection.send_response(200)
@@ -76,6 +78,14 @@ class Logos(object):
         if not os.path.exists(file_path):
             self.logger.error("send_image_info(%s) not found" % logo_file_name)
             connection.send_error(404, "Not Found %s" % logo_file_name)
+
+        if_none_match = connection.headers.get('If-None-Match')
+        if if_none_match is not None and if_none_match == md5(file_path):
+            logging.debug('[%s]: ETag matches. Return 304 to [%s]' % (self.__class__.__name__, connection.clientip))
+            connection.send_response(304)
+            connection.send_header('Connection', 'close')
+            connection.end_headers()
+            return
 
         with io.open(file_path, 'rb') as content_file:
             exported = content_file.read()
@@ -100,11 +110,3 @@ class Logos(object):
         connection.end_headers()
         connection.wfile.write(exported)
         self.logger.info("send_image(), done: %s" % logo_file_name)
-
-    def md5(self, file_path):
-        self.logger.info("md5(%s)" % file_path)
-        hash_md5 = hashlib.md5()
-        with open(file_path, "rb") as f:
-            for chunk in iter(lambda: f.read(4096), b""):
-                hash_md5.update(chunk)
-        return hash_md5.hexdigest()
