@@ -110,7 +110,6 @@ logomap = {
     u'Остросюжетное HD': logobase + 'mxF7CZsqsDRMMK4pN8ekdccEgvEsZC.png',
     u'Страшное HD': logobase + 'cq6IE7NWJgUDkFFMKp65BbHTOniMje.png',
     u"НСТ (Страшное)": logobase + 'fKYzdlWRz68qd9mRZnWuxMY73EyaSz.png',
-    u"Наш Детектив HD": logobase + 'Dj0hDhHdckvGp86dDi058HRBe6JLq0.png',
     u"Русский детектив": logobase + '7I7VjbsFMIkZdoSbHFXiKEVZKNUbOM.png',
     u"Русский иллюзион": logobase + 'E9Imfr8aHN5midPVpNhJ3fo49FHbQE.png',
     u"ТВ XXI": logobase + 'TKchoTWZFRMmGDBok08zoEFJ8mJJCe.png',
