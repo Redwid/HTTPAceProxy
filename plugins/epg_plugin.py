@@ -19,7 +19,7 @@ import traceback
 import config.epg_filter as config
 from modules.utils import md5
 from plugins.epg_filter import EpgFilter
-from utils import schedule, query_get
+from utils import schedule, query_get, schedule_with_first_run_delay
 from datetime import datetime
 
 
@@ -34,7 +34,7 @@ class Epg(object):
         self.etag = None
         self.headers = {'User-Agent': 'Magic Browser'}
         if config.updateevery:
-            schedule(60, config.updateevery * 60, self.download_and_filter)
+            schedule_with_first_run_delay(60, config.updateevery * 60, self.download_and_filter)
         pass
 
     def download_and_filter(self):

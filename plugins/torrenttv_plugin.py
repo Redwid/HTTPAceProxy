@@ -26,7 +26,7 @@ class Torrenttv(object):
         self.picons = self.channels = self.playlist = self.etag = None
         self.playlisttime = gevent.time.time()
         self.headers = {'User-Agent': 'Magic Browser'}
-        if config.updateevery: schedule(0, config.updateevery * 60, self.Playlistparser)
+        if config.updateevery: schedule(config.updateevery * 60, self.Playlistparser)
 
     def Playlistparser(self):
         try:

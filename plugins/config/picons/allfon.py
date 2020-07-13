@@ -51,7 +51,6 @@ logomap = {
     u'Моя Планета': logobase + 'Qa41eifERrD77xQsmpRGbeTq95Ldlv.png',
     u'Мужское Кино': logobase + 'y997iu65e65h4w5d3s4dy.png',
     u'МУЛЬТ': logobase + 'ZVzHvGF8mZ6RTsSh6aWsPbF1FBLjyp.png',
-    u'Наука': logobase + 'OddcmNqjIGsNDv3hm5RkZNrrPwd8cX.png',
     u'Ностальгия': logobase + 'tIfiXoDaXoZevuGu9pZJSvX8unv1xl.png',
     u'НСТ': logobase + 'fKYzdlWRz68qd9mRZnWuxMY73EyaSz.png',
     u'НТВ': logobase + 'B5GA1cfgmn8EsxrdwfNUIrEbdqarXf.png',

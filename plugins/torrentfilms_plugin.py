@@ -26,7 +26,7 @@ class Torrentfilms(object):
         self.videoextdefaults = ('.3gp','.aac','.ape','.asf','.avi','.dv','.divx','.flac','.flc','.flv','.m2ts','.m4a','.mka','.mkv',
                                  '.mpeg','.mpeg4','.mpegts','.mpg4','.mp3','.mp4','.mpg','.mov','.m4v','.ogg','.ogm','.ogv','.oga',
                                  '.ogx','.qt','.rm','.swf','.ts','.vob','.wmv','.wav','.webm')
-        if config.updateevery: schedule(0, config.updateevery * 60, self.playlistdata)
+        if config.updateevery: schedule(config.updateevery * 60, self.playlistdata)
 
     def playlistdata(self):
         self.playlist = []
