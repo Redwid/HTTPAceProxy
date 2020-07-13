@@ -105,7 +105,7 @@ class HTTPHandler(BaseHTTPRequestHandler):
         self.path = self.path.rstrip('/')
         # Pretend to work fine with Fake or HEAD request.
         if self.command == 'HEAD' or AceConfig.isFakeRequest(self.path, self.query, self.headers):
-           if '/logos/' not in self.path:
+           if '/logos/' not in self.path and '/epg' not in self.path:
                # Return 200 and exit
                if self.command != 'HEAD': self.command = 'FAKE'
                logging.debug('[{clientip}]: {command} request: send headers and close the connection'.format(**self.__dict__))
@@ -504,7 +504,7 @@ AceProxy.ace = findProcess('ace_engine.exe' if AceConfig.osplatform == 'Windows'
 if not AceProxy.ace and AceConfig.acespawn:
    if spawnAce():
       logger.info('Local AceStream engine spawned with pid %s' % AceProxy.ace.pid)
-      schedule(0, AceConfig.acestartuptimeout, checkAce) # Start AceEngine alive watchdog
+      schedule(AceConfig.acestartuptimeout, checkAce) # Start AceEngine alive watchdog
 elif AceProxy.ace:
    AceProxy.ace = psutil.Process(AceProxy.ace)
    logger.info('Local AceStream engine found with pid %s' % AceProxy.ace.pid)
