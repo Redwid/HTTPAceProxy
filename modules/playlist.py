@@ -50,7 +50,7 @@ class PlaylistConfig():
     m3uchannelnames['VH1'] = 'VH1 European'
     m3uchannelnames['1 HD'] = '1HD Music Television'
     m3uchannelnames['1Music (Hungary)'] = '1 Music Channel (Hungary)'
-    m3uchannelnames[u'Страна'] = u'Мульт и Музука'
+    m3uchannelnames[u'Страна'] = u'Мульт и Музыка'
     m3uchannelnames[u'НТВ+ Наш футбол HD'] = u'Матч! Премьер'
 
     # Similar to m3uchannelnames but for groups

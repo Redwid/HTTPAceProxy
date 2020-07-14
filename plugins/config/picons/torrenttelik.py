@@ -102,7 +102,6 @@ logomap = {
     u"ViP Comedy HD": logobase + 'lO9PoF8cTaTlehJPMkkOqZM1cYEPcc.png',
     u"ViP Premiere HD": logobase + 'NxpfVz8kXfNmwuj0cIhIQewuII9j7m.png',
     u"Дом кино Премиум HD": logobase + 'Xg5l3gO5SnER0pwHhgsbHVMqSb42ty.png',
-    u"КиноТВ HD": logobase + 'NGQLEmlltpslVNKkD0htUF7CogGXqX.png',
     u"Киномикс": logobase + 'y6b876ih8g7R876hfug3897wrhj.png',
     u'Кинопоказ': logobase + 'L2qsABeMEDKOSG4Tvh7XpfvX2BfksG.png',
     u"Кинопоказ HD1": logobase + 'pNA1vR3sPoovYNKzO4TU6NQcSXNqjk.png',
