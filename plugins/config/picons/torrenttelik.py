@@ -123,7 +123,6 @@ logomap = {
     u"Eurosport HD": logobase + 'DpFTzUEA3y67Z6ObTPF4xH0XLNRAZm.png',
     u"Viasat Sport HD Россия": logobase + 'prAZKkny3W1HGM03lP0EhzcMmTPZdi.png',
     u"Матч ТВ HD": logobase + 'MXyy9Uud7oDuH8JqVisjsD0csgAHnQ.png',
-    u"НТВ+ Наш футбол HD": logobase + '',
     u"Сетанта Спорт + HD": logobase + 'X8VE9n2LhKfE67miEWg9VeioeA3QwT.png',
     u'Че': logobase + 'Hv36ZG48lg1mm2wdxAo3ju1EFS41Ga.png',
     u'Ю': logobase + 'YvnG7hXCwMmHnakp2KkCbqeCigHcuK.png'
