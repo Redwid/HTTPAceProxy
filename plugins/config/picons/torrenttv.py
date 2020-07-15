@@ -211,7 +211,6 @@ logomap = {
     u'Direct 13 Curacao': logobase + 's01Q1WkIR9XjcGrXvXgEDtf9I3y3ok.png',
     u'Discovery Channel': logobase + 'oKx1ImWVRT3AK3DHYWUVc71JZUkwu5.png',
     u'Discovery channel Bulgaria': logobase + 'EuhbRZkWS1xD6TiqLu19cO3taPg604.png',
-    u'Discovery Channel HD': logobase + 'SmWnYlOvkJn8GzttT2UY0vmo8PYfMg.png',
     u'Discovery Historia Polska': logobase + 'DQvOBosiJ3hV7ThJ6LvLCpj54QJES1.png',
     u'Discovery Science': logobase + 'GAaO3EfDwMuHAIelG4gYW6TDEYbLnS.png',
     u'Discovery Showcase Europe HD': logobase + 'XAHxkkrYx2ixx7b1KJWtSEXBBda0bj.png',
