@@ -58,7 +58,6 @@ logomap = {
 #    u'Парк развлечений': logobase + '',
     u'Первый': logobase + 'WimZD6efLd6QotrPP9uiJeF7t50nFv.png',
     u'Психология 21': logobase + 'AyLAdiqcKu5X8ykdLf2bO9HsxMlJdO.png',
-    u'Пятница': logobase + '0fafj6PSIWdqtBdgwYTl9M06SDU2wA.png',
     u'РЕН ТВ': logobase + 'LJvkfB2kYaDzij1Y13Fy6syUCkP5Y6.png',
     u'Ретро ТВ': logobase + '5vuRj5ip04YKBNM60rdB7aFueKvypo.png',
     u'Россия 1': logobase + 'UUrfoqi6NQcc9gRLnCc8ODZJ2T3ShE.png',
