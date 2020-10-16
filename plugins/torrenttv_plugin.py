@@ -63,6 +63,7 @@ class Torrenttv(object):
 
         except requests.exceptions.RequestException:
            logging.error("[%s]: can't download %s playlist!" % (self.__class__.__name__, config.url))
+           logging.error(traceback.format_exc())
            return False
         except: logging.error(traceback.format_exc()); return False
 
