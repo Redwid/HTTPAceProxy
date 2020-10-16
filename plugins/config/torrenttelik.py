@@ -20,7 +20,7 @@ Playlist format example:
 # If your http-proxy need authentification - proxies = {https' : 'https://user:password@ip:port'}
 
 #proxies = {'http' : 'socks5h://192.168.1.1:9100', 'https' : 'socks5h://192.168.1.1:9100'}
-proxies = {'http': 'socks5://192.168.1.29:9050', 'https': 'socks5://192.168.1.29:9050' }
+proxies = {'http': 'socks5h://192.168.1.29:9050', 'https': 'socks5h://192.168.1.29:9050' }
 
 # Channels urls or path to file ('file:///path/to/file' or 'file:///C://path//to//file' for Windows OS)
 # Be careful of this: http://91.92.66.82/trash/ttv-list/MyTrafWarn.php
