@@ -20,12 +20,16 @@ Playlist format example:
 # If your http-proxy need authentification - proxies = {https' : 'https://user:password@ip:port'}
 
 #proxies = {'http' : 'socks5h://192.168.1.1:9100', 'https' : 'socks5h://192.168.1.1:9100'}
-proxies = {}
+proxies = {'http': 'socks5://127.0.0.1:9050', 'https': 'socks5://127.0.0.1:9050' }
 
 # Channels urls or path to file ('file:///path/to/file' or 'file:///C://path//to//file' for Windows OS)
 # Be careful of this: http://91.92.66.82/trash/ttv-list/MyTrafWarn.php
+# List: http://91.92.66.82/trash/ttv-list/AceLiveList.php
 #url = 'http://pomoyka.win/trash/ttv-list/ace.json'
-url = 'http://91.92.66.82/trash/ttv-list/ace.json'
+#url = 'http://91.92.66.82/trash/ttv-list/ace.json'
+#I2P : http://pomoyka.i2p/trash/ttv-list/
+#I2P (b32) : http://omt56v4jxa4hurbwk44vqbbcwn3eavuynyc24c25cy7grucjh24q.b32.i2p/trash/ttv-list/
+url = 'http://f27uk3gyl2gfu4z36eifv4ob73w6xgrcms4w4vdxzcsxsobgc766ityd.onion/trash/ttv-list/ace.json'
 
 # EPG urls
 tvgurl = 'https://iptvx.one/epg/epg.xml.gz'
