@@ -204,7 +204,7 @@ class EpgFilter(object):
         if not os.path.exists(destination_file_path_cache_folder):
             os.makedirs(destination_file_path_cache_folder)
 
-        get_response = requests.get(url, headers=headers, verify=False, stream=True, timeout=(5,30))
+        get_response = requests.get(url, headers=headers, verify=False, stream=False, timeout=(5,30))
         self.logger.info("download_file(), response: %s" % get_response)
         if get_response.status_code == 304:
             self.logger.info("download_file() ignore as file 'Not Modified'")
