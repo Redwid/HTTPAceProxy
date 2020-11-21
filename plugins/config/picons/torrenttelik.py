@@ -88,7 +88,6 @@ logomap = {
     u"TV1000 Action East": logobase + 'GblbxkDGXZyW5oWt9W8wuERQAiZ7ZT.png',
     u"TV1000 East": logobase + 'WJMEvVafVakrm7BUMy1lzku7VQCx25.png',
     u"TV1000 Русское кино": logobase + 'ch5DX6f8hxDnmyzrjotUoKHNGzcw9P.png',
-    u'ViP Megahit HD': logobase + 'mPzm416HTmW7uEPgjICGeKK95Tma5Y.png',
     u"Дом кино Премиум HD": logobase + 'Xg5l3gO5SnER0pwHhgsbHVMqSb42ty.png',
     u"Киномикс": logobase + 'y6b876ih8g7R876hfug3897wrhj.png',
     u'Кинопоказ': logobase + 'L2qsABeMEDKOSG4Tvh7XpfvX2BfksG.png',

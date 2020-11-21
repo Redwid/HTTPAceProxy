@@ -807,7 +807,6 @@ logomap = {
     u'Viasat Sport HD': logobase + 'prAZKkny3W1HGM03lP0EhzcMmTPZdi.png',
     u'ViaVosges': logobase + 'W1K9T4bQwDX3RvhHJXmzvPaaphvXAS.png',
     u'Videolina': logobase + 'RIc1eEWgjlx7g2fnsPFlczLbEGaEcj.png',
-    u'ViP Megahit HD': logobase + 'mPzm416HTmW7uEPgjICGeKK95Tma5Y.png',
     u'ViP Serial HD': logobase + 'Uu7rNBxXUyEgc5Cbc91Yab6sMHYaqQ.png',
     u'Vision Sverige': logobase + 'eOOzmyHVLJWzMMZJg1bzQheNrzp3pq.png',
     u'Vision TV Musica': logobase + 'SItcl3Aa2eXegAsdWbU0IWJ8FZk7nu.png',
