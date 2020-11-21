@@ -8,8 +8,6 @@ logobase = 'http://ttv.pp.ua/picons/'
 # Channels logo/path mapping
 logomap = {
     u"365 дней ТВ": logobase + '0IZrVwoxtmjtgnWu5Dj4Hb8FRc8NIX.png',
-#    u"Animal Family HD": logobase + '',
-    u"Animal Planet HD": logobase + '45.png',
     u"Eureka HD": logobase + 'OaWtWXpPyC1adsRP69CUPBnJPrT0lt.png',
     u"HD-Life": logobase + 'jUteUS0xRGdvLyBVqNjowEUDkOjT0t.png',
     u"History Россия HD": logobase + 'VFgU260pmiIyPxCzD3f8R7Yc6DXClH.png',
@@ -76,7 +74,6 @@ logomap = {
     u"Brazzers TV": logobase + 'VPCmFsMfpnB0pg9VBzvUG5TkRcHTsR.png',
     u"НЮ АРТ": logobase + 'aqMIuUixqLQYmJITPnOGtFkRPuTqKa.png',
     u"Россия 24": logobase + 'LWfGV6eICPYL7psaBfw2dOgGrOtHFS.png',
-    u"Nick Jr": logobase + 'D87kJ3fIWIm5wKi5qxm24nbuPQv0U8.png',
     u"Канал Disney": logobase + 'JxEjTeXwExjnxutQGKJBmMI85tpNqK.png',
     u"Карусель": logobase + 'S233D4b6eq7KOXfdyi4dY2GokKeltg.png',
     u'Новый канал': logobase + 'k7YdHhVpFZPIkBMXS2P2O2TkZSPf0y.png',
