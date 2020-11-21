@@ -63,7 +63,6 @@ logomap = {
     u'Россия 1': logobase + 'UUrfoqi6NQcc9gRLnCc8ODZJ2T3ShE.png',
     u'Россия 24': logobase + 'LWfGV6eICPYL7psaBfw2dOgGrOtHFS.png',
     u'РТВ - Любимое кино': logobase + 'LSR5M6VxB0YDwv6803zrGFkq7vGQ3J.png',
-    u'Русский бестселлер': logobase + 'b5JXaosgmcanh9EVJg52yBefvdLQF7.png',
     u'Русский детектив': logobase + '7I7VjbsFMIkZdoSbHFXiKEVZKNUbOM.png',
     u'Русский Иллюзион': logobase + 'E9Imfr8aHN5midPVpNhJ3fo49FHbQE.png',
     u'Русский роман': logobase + '2smriIFxtj7Ojh4jyZq0K1XrT98XjS.png',
