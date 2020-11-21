@@ -37,7 +37,7 @@ cache_folder = '.cache'
 # Replacement map for channels
 # [list_to_check in xml][list_to_insert in m3u ]
 replacement_map = [
-    [[u'Animal Planet'], u'Animal Planet HD'],
+    [[u'Animal Planet', u'Animal Planet Россия HD'], u'Animal Planet HD'],
     [[u'Da Vinci', u'Да Винчи'], u'Da Vinci'],
     [[u'Discovery Россия'], u'Discovery Россия HD'],
     [[u'Candy', u'Candy 3D HD'], u'Candy HD'],
