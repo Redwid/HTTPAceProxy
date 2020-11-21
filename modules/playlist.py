@@ -144,7 +144,7 @@ class PlaylistConfig():
     m3utvgnames['Авто 24'] = 'Авто24'
     m3utvgnames['Дайвинг ТВ HD'] = 'Дайвинг.TV'
     m3utvgnames['Animal Planet'] = 'Animal Planet Россия'
-    m3utvgnames['Animal Planet HD'] = 'Animal Planet Россия HD'
+    # m3utvgnames['Animal Planet HD'] = 'Animal Planet Россия HD'
     m3utvgnames['Discovery Channel'] = 'Discovery Россия'
     m3utvgnames['Discovery Channel HD'] = 'Discovery Россия HD'
     m3utvgnames['Discovery Historia Polska'] = 'Discovery Historia'
