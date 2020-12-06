@@ -13,7 +13,6 @@ logomap = {
     u'A2': logobase + 'KY8tm4Runi4FpgUYcAn5WoeXqiD3Y5.png',
     u'Ani': logobase + 'vui1cRrE05CZv1N9Qb20jJ6mTFOJue.png',
     u'Da Vinci': logobase + 'Yl6p1IDDkZxxiUa3p2JxI66mIlOPns.png',
-    u'National Geographic': logobase + 'i6STSw6Hg1wWP18yBAOyKoKpSMeKLu.png',
     u'Nickelodeon': logobase + 'j66xpaZbfiYIgQxv76QAPckPVjmLNs.png',
     u'Paramount Comedy': logobase + '5EtvAWXB7VK1Yw82yvO28sY28dU4ZC.png',
     u'Russia Today': logobase + 'rL14fwCe8q10mKTchOwLkfwQVki9XK.png',

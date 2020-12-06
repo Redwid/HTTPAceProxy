@@ -13,7 +13,6 @@ logomap = {
     u"History Россия HD": logobase + 'VFgU260pmiIyPxCzD3f8R7Yc6DXClH.png',
     u"History2 HD": logobase + 'TaToxTsGJnMk9nvWCBqfZvcJ2GyGUC.png',
     u"ID Xtra Россия": logobase + 'fq3ovkZeu4R4YVYt1VMZN1NU7mMrH9.png',
-    u"National Geographic": logobase + 'i6STSw6Hg1wWP18yBAOyKoKpSMeKLu.png',
     u"National Geographic HD": logobase + 'hK1waimMq9eAp0ugM19moSoQvUeve5.png',
     u"Outdoor channel HD": logobase + 'SuxFoocUmay5G8jtfJaHL1yIbAT5Hr.png',
 #    u"RT Д HD": logobase + '',

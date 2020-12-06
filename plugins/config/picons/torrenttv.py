@@ -471,7 +471,6 @@ logomap = {
     u'N24 Austria': logobase + 'aQjAnNNoEEtgaFuBFQkBSfh8A5kwlX.png',
     u'N24 Doku': logobase + 'eq9YvFYrrALYxVCZJfAkVGowMr0BWS.png',
     u'Nat Geo People HD': logobase + 'oJNPYhsu42sWrkF9I5mADS44jvZLAK.png',
-    u'National Geographic': logobase + 'i6STSw6Hg1wWP18yBAOyKoKpSMeKLu.png',
     u'National Geographic HD': logobase + 'hK1waimMq9eAp0ugM19moSoQvUeve5.png',
     u'National Geographic Polska': logobase + 'PtoKR0FVbCGRB6wTO24AOlKaW3UxEP.png',
     u'NB (Croatia)': logobase + '9cFxMZSegENPZBYqMZivl0Bzi7hSCn.png',
