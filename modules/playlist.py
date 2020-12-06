@@ -52,6 +52,7 @@ class PlaylistConfig():
     m3uchannelnames['1Music (Hungary)'] = '1 Music Channel (Hungary)'
     m3uchannelnames[u'Страна'] = u'Мульт и Музыка'
     m3uchannelnames[u'НТВ+ Наш футбол HD'] = u'Матч! Премьер'
+    m3uchannelnames[u'National Geographic'] = u'DocuBox HD'
 
     # Similar to m3uchannelnames but for groups
     m3ugroupnames = dict()
