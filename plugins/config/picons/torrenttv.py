@@ -1095,8 +1095,6 @@ logomap = {
     u'Первый Городской HD (Одесса)': logobase + 'YBoRH12n9V1LOhGrR9jQrPMF4lGkoS.png',
     u'Первый деловой': logobase + 'a1Qf3MpxC9FPD68Tj8vtUTNK8P25xr.png',
     u'Первый Западный (Львов)': logobase + '7m4VPDiVhuLywilUMOqY1GhVQB286n.png',
-    u'Первый канал': logobase + 'WimZD6efLd6QotrPP9uiJeF7t50nFv.png',
-    u'Первый канал (+2)': logobase + 'GGe1ttMtczS0mgzMCegYji57J3PIaJ.png',
     u'Первый канал (4:3)': logobase + 'WimZD6efLd6QotrPP9uiJeF7t50nFv.png',
     u'Первый канал (СНГ)': logobase + 'sgHReQnscPMIJgfDJf0uRFzxVBRKx9.png',
     u'Первый канал Евразия': logobase + 'UxAkAKQZ2gNllniwvJzbGfpqQLGDVU.png',

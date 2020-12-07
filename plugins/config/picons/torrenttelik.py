@@ -55,7 +55,6 @@ logomap = {
     u'НТВ HD': logobase + 'zdJ3ye6d3UWl5a56zm6LjqYH6ziSOs.png',
     u"НТВ (+2)": logobase + 'B5GA1cfgmn8EsxrdwfNUIrEbdqarXf.png',
     u'ОТР': logobase + 'CqxKorK72v3ULbWkB3ZOhdte0duYZa.png',
-    u"Первый канал (+2)": logobase + 'GGe1ttMtczS0mgzMCegYji57J3PIaJ.png',
     u"РЕН ТВ": logobase + 'LJvkfB2kYaDzij1Y13Fy6syUCkP5Y6.png',
     u"Россия 1 (+2)": logobase + 'UUrfoqi6NQcc9gRLnCc8ODZJ2T3ShE.png',
     u'Россия HD': logobase + 'ghvqmVpPWqn9x6POAm9UJBvXFzTrqN.png',
