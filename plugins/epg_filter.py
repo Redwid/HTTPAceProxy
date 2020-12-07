@@ -134,7 +134,8 @@ replacement_map = [
     [[u'Kentron TV'], u'Kentron'],
     [[u'Россия К'], u'Культура'],
     [[u'Extreme sport'], u'Extreme Sports'],
-    [[u'KAZsport'], u'Kazsport']
+    [[u'KAZsport'], u'Kazsport'],
+    [[u'Моя Планета', u'Моя Планета HD', u'Планета HD'], u'Моя планета']
 ]
 
 class EpgFilter(object):
