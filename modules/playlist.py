@@ -19,7 +19,6 @@ class PlaylistConfig():
     # Examples:
     m3uchannelnames['Amedia 1'] = 'A1'
     m3uchannelnames['Amedia 2'] = 'A2'
-    m3uchannelnames['Da Vinci Learning'] = 'Da Vinci'
     m3uchannelnames['SET'] = 'Sony channel'
     m3uchannelnames['SET HD'] = 'Sony channel HD'
     m3uchannelnames['History 2 HD'] = 'H2 HD'
@@ -154,7 +153,7 @@ class PlaylistConfig():
     m3utvgnames['ID Investigation Discovery'] = 'ID Xtra (Россия)'
     m3utvgnames['ID:Investigation Discovery Europe HD'] = 'ID Xtra (Европа)'
     m3utvgnames['HDL'] = 'HDL (HD Life)'
-    m3utvgnames['Da Vinci'] = 'Da Vinci Learning Россия'
+    m3utvgnames['Da Vinci'] = 'Da Vinci Learning'
     m3utvgnames['H2 HD'] = 'H2'
     m3utvgnames['Russia Today Doc.'] = 'RT doc'
     m3utvgnames['Russia Today Doc HD'] = 'RT doc'
