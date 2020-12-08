@@ -242,7 +242,20 @@ class PlaylistConfig():
     # The channel and group names are matched against case-insensitive regular expressions.
     # It is a good idea to specify massive drop at the beginning to minimize the amount of further processing.
     # The very last filter item in the example below will match and drop everything that wasn't matched before.
-    m3ufilter = {}
+    m3ufilter = {
+        '10-not-working': {
+            'allowed': False,
+            'channel': [
+                u"KIDS.*HD.*",
+                u"Дождь.*"
+            ]
+         },
+        '99-default': {
+            'allowed': True,
+            'channel': [".*"],
+        }
+
+    }
     #m3ufilter = {
     #    '10-adult': {
     #        'allowed': False,
