@@ -350,7 +350,6 @@ logomap = {
     u'HD Media 3D': logobase + 'takNty6pirY7TeCRPX5VyUW1mZHHxI.png',
     u'History 2 HD': logobase + 'lg6GYN6n02WJMOruGkRO7PsIUBD6Zj.png',
     u'History Channel': logobase + '9cVifexiWW0qWDhhpnLNVydoZkeRqZ.png',
-    u'History Channel HD': logobase + 'VFgU260pmiIyPxCzD3f8R7Yc6DXClH.png',
     u'History Lab': logobase + 'jzYLVtq7nJC3CPteg9nlYd3eDpPUVo.png',
     u'HIT TV': logobase + 'FbDCrGepHpWUpcuc6U7bqBpnpUzWZA.png',
     u'HITV HD': logobase + 'TTFvOWrgqybOkSnDO6vzxuH0C5bFc0.png',

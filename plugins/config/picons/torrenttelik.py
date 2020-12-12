@@ -10,7 +10,6 @@ logomap = {
     u"365 дней ТВ": logobase + '0IZrVwoxtmjtgnWu5Dj4Hb8FRc8NIX.png',
     u"Eureka HD": logobase + 'OaWtWXpPyC1adsRP69CUPBnJPrT0lt.png',
     u"HD-Life": logobase + 'jUteUS0xRGdvLyBVqNjowEUDkOjT0t.png',
-    u"History Россия HD": logobase + 'VFgU260pmiIyPxCzD3f8R7Yc6DXClH.png',
     u"History2 HD": logobase + 'TaToxTsGJnMk9nvWCBqfZvcJ2GyGUC.png',
     u"ID Xtra Россия": logobase + 'fq3ovkZeu4R4YVYt1VMZN1NU7mMrH9.png',
     u"National Geographic HD": logobase + 'hK1waimMq9eAp0ugM19moSoQvUeve5.png',

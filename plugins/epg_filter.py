@@ -133,7 +133,7 @@ replacement_map = [
     [[u'М1 Украина'], u'M1'],
     [[u'Kentron TV'], u'Kentron'],
     [[u'Россия К'], u'Культура'],
-    [[u'Extreme sport'], u'Extreme Sports'],
+    [[u'Extreme sport', u'Extreme sports HD'], u'Extreme Sports'],
     [[u'KAZsport'], u'Kazsport'],
     [[u'Моя Планета', u'Моя Планета HD', u'Планета HD'], u'Моя планета']
 ]
