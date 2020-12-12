@@ -122,7 +122,7 @@ replacement_map = [
     [[u'TV3 LT', u'TV3 Литва'], u'TV3'],
     [[u'LRT Televizija'], u'LRT'],
     [[u'ТВ3', u'ТВ-3'], u'ТВ3 Россия'],
-    [[u'Мульт и музыка', u'МультиМузыка'], u'Страна'],
+    [[u'Мульт и музыка', u'МультиМузыка'], u'Мульт и Музыка'],
     [[u'В мире животных HD'], u'Animal Family HD'],
     [[u'Эврика HD'], u'Eureka HD'],
     [[u'Russia Today'], u'RT Д HD'],
