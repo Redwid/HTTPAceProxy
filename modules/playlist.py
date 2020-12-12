@@ -236,6 +236,11 @@ class PlaylistConfig():
     m3utvgnames['Brazzers TV Europe'] = 'Brazzers TV Europe (Россия)'
     m3utvgnames['MULTIMANIA TV'] = 'Мультимания'
 
+    # Channel group name to something else
+    m3ChannelGroupnames = dict()
+    m3ChannelGroupnames[u'Мульт и Музыка'] = 'Детские'
+
+
     # Filtering rules
     # Empty dict skips filtering, all the channels are "whitelisted".
     # Filter items are iterated in alphabetical order.
@@ -352,6 +357,7 @@ class PlaylistConfig():
         PlaylistConfig._changeItemByDict(item, 'name', PlaylistConfig.m3uchannelnames)
         PlaylistConfig._changeItemByDict(item, 'group', PlaylistConfig.m3ugroupnames)
         PlaylistConfig._changeItemByDict(item, 'name', PlaylistConfig.m3utvgnames, 'tvg')
+        PlaylistConfig._changeItemByDict(item, 'name', PlaylistConfig.m3ChannelGroupnames, 'group')
 
     @staticmethod
     def _changeItemByDict(item, key, replacementsDict, setKey=None):
