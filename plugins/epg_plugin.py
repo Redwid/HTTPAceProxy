@@ -104,7 +104,7 @@ class Epg(object):
             header_time = self.get_header_time(if_modified_since)
             self.logger.info("If-Modified-Since: [%s], time: [%s]" % (if_modified_since, header_time))
             self.logger.info("epg_all_file_time: [%s], time: [%s]" % (epg_all_file_last_modified, epg_all_file_time))
-            if header_time >= epg_all_file_time:
+            if header_time is not None and header_time >= epg_all_file_time:
                 self.logger.info("send_epg(), If-Modified-Since matches. Return 304 to [%s]" % connection.clientip)
                 connection.send_response(304)
                 connection.send_header('Connection', 'close')
