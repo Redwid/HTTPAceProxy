@@ -52,7 +52,6 @@ logomap = {
     u'МУЛЬТ': logobase + 'ZVzHvGF8mZ6RTsSh6aWsPbF1FBLjyp.png',
     u'Ностальгия': logobase + 'tIfiXoDaXoZevuGu9pZJSvX8unv1xl.png',
     u'НСТ': logobase + 'fKYzdlWRz68qd9mRZnWuxMY73EyaSz.png',
-    u'НТВ': logobase + 'B5GA1cfgmn8EsxrdwfNUIrEbdqarXf.png',
     u'Охота и рыбалка': logobase + '5l2P20J6ebTh0ptOr27Hh704niP3nU.png',
 #    u'Парк развлечений': logobase + '',
     u'Первый': logobase + 'WimZD6efLd6QotrPP9uiJeF7t50nFv.png',
