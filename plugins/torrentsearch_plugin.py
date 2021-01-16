@@ -51,7 +51,7 @@ class Torrentsearch(object):
                                 channel = {}
                                 name = item['name']
                                 channel['name'] = name
-                                channel['url'] = 'acestream://{}'.format(item['infohash'])
+                                channel['url'] = 'infohash://{}'.format(item['infohash'])
                                 if 'categories' in item:
                                     channel['group'] = item['categories'][0]
                                 else:
